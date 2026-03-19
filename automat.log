@@ -8,3 +8,5 @@ użyj opcji „--force”. Jeśli lokalny katalog gita nie leży w prawidłowym 
 lub nie jesteś pewien, co to znaczy, wybierz inną nazwę za pomocą opcji „--name”.
 >>> Brak nowych wpisów w Arkuszu. Kończę pracę.
 >>> Brak nowych wpisów w Arkuszu. Kończę pracę.
+>>> Brak nowych wpisów w Arkuszu. Kończę pracę.
+./terminator.sh: linia 74: błąd składni: nieoczekiwany koniec pliku
