@@ -1,6 +1,11 @@
-===================================================
-Projekt Bazy Danych: System Zarządzania Biblioteką
-===================================================
+=======================================================================
+Sprawozdanie: Projektowanie  Bazy Danych: System Zarządzania Biblioteką
+=======================================================================
+
+:Autorzy:
+    1. Paweł Łoćwin
+    2. Paweł Łosowski
+
 
 1. Wybór zagadnienia, opis procesów i danych
 ============================================
@@ -72,7 +77,7 @@ Występuje relacja wiele-do-wielu (M:N) między Czytelnikiem a Książką (czyte
 
 Schemat w notacji Chena
 -----------------------
-.. image:: img/model_konceptualny_biblioteka.png
+.. image:: model_konceptualny_biblioteka.png
    :alt: Model konceptualny bazy danych biblioteki (Schemat Chena).
 
 4. Model logiczny i proces normalizacji
@@ -101,7 +106,7 @@ Eliminacja zależności przechodnich. Z tabeli ``Ksiazki`` wydzielamy powtarzaj�
 
 4.3. Diagram ERD (Model Logiczny)
 ---------------------------------
-.. image:: img/erd_logiczny_biblioteka.png
+.. image:: erd_logiczny_biblioteka.png
    :alt: Diagram logiczny ERD bazy danych biblioteki (Postać 3NF).
 
 5. Model fizyczny bazy danych
@@ -118,7 +123,7 @@ Z uwagi na okrojony zestaw typów, daty są mapowane jako TEXT.
 * **Ksiazki:** ID_Ksiazki : INTEGER PRIMARY KEY, ID_Autora : INTEGER, ID_Kategorii : INTEGER, Tytul : TEXT, Rok_Wydania : INTEGER
 * **Wypozyczenia:** ID_Wypozyczenia : INTEGER PRIMARY KEY, ID_Czytelnika : INTEGER, ID_Ksiazki : INTEGER, Data_Wypozyczenia : TEXT, Data_Zwrotu : TEXT
 
-.. image:: img/fizyczny_sqlite_biblioteka.png
+.. image:: fizyczny_sqlite_biblioteka.png
    :alt: Fizyczny schemat bazy danych dla silnika SQLite.
 
 5.2. Model fizyczny dla środowiska PostgreSQL
@@ -131,5 +136,5 @@ PostgreSQL umożliwia zastosowanie precyzyjnych i natywnych typów, w tym rygory
 * **Ksiazki:** ID_Ksiazki : SERIAL PRIMARY KEY, ID_Autora : INTEGER REFERENCES Autorzy, ID_Kategorii : INTEGER REFERENCES Kategorie, Tytul : VARCHAR(150), Rok_Wydania : SMALLINT
 * **Wypozyczenia:** ID_Wypozyczenia : SERIAL PRIMARY KEY, ID_Czytelnika : INTEGER REFERENCES Czytelnicy, ID_Ksiazki : INTEGER REFERENCES Ksiazki, Data_Wypozyczenia : DATE DEFAULT CURRENT_DATE, Data_Zwrotu : DATE
 
-.. image:: img/fizyczny_postgres_biblioteka.png
-   :alt: fizyczny_postgres_biblioteka: Fizyczny schemat bazy danych opracowany dla silnika PostgreSQL.
+.. image:: fizyczny_postgres_biblioteka.drawio.png
+   :alt: Fizyczny schemat bazy danych opracowany dla silnika PostgreSQL.
