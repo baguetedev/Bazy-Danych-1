@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Sprawozdanie-z-labow'
-copyright = '2026, pawel'
-author = 'pawel'
+copyright = '2026, Paweł Łoćwin'
+author = 'Paweł Łoćwin'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

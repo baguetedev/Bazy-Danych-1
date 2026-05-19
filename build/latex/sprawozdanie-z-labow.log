@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.3.1)  19 MAY 2026 13:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.3.1)  19 MAY 2026 13:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1015,7 +1015,7 @@ Package rerunfilecheck Info: File `sprawozdanie-z-labow.out' has not changed.
 Here is how much of TeX's memory you used:
  20473 strings out of 473197
  367513 string characters out of 5718606
- 796884 words of memory out of 5000000
+ 796894 words of memory out of 5000000
  43199 multiletter control sequences out of 15000+600000
  613262 words of font info for 79 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
@@ -1029,7 +1029,7 @@ st/fonts/type1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 /txfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/tc
 xtt.pfb>
-Output written on sprawozdanie-z-labow.pdf (29 pages, 2447683 bytes).
+Output written on sprawozdanie-z-labow.pdf (29 pages, 2447748 bytes).
 PDF statistics:
  554 PDF objects out of 1000 (max. 8388607)
  493 compressed objects within 5 object streams
