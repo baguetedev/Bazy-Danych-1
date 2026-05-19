@@ -1,5 +1,5 @@
 =======================================================================
-Sprawozdanie: Projektowanie  Bazy Danych: System Zarządzania Biblioteką
+Rozdzial 3: Projektowanie  Bazy Danych: System Zarządzania Biblioteką
 =======================================================================
 
 :Autorzy:
