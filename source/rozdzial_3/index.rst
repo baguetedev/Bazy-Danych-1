@@ -77,6 +77,7 @@ Występuje relacja wiele-do-wielu (M:N) między Czytelnikiem a Książką (czyte
 Schemat w notacji Chena
 -----------------------
 .. image:: model_konceptualny_biblioteka.png
+   :width: 80%
    :alt: Model konceptualny bazy danych biblioteki (Schemat Chena).
 
 Model logiczny i proces normalizacji
@@ -106,6 +107,7 @@ Ostateczna struktura tabel (3NF)
 Diagram ERD (Model Logiczny)
 ----------------------------
 .. image:: erd_logiczny_biblioteka.png
+   :width: 80%
    :alt: Diagram logiczny ERD bazy danych biblioteki (Postać 3NF).
 
 Model fizyczny bazy danych
@@ -123,6 +125,7 @@ Z uwagi na okrojony zestaw typów, daty są mapowane jako TEXT.
 * **Wypozyczenia:** ID_Wypozyczenia : INTEGER PRIMARY KEY, ID_Czytelnika : INTEGER, ID_Ksiazki : INTEGER, Data_Wypozyczenia : TEXT, Data_Zwrotu : TEXT
 
 .. image:: fizyczny_sqlite_biblioteka.png
+   :width: 80%
    :alt: Fizyczny schemat bazy danych dla silnika SQLite.
 
 Model fizyczny dla środowiska PostgreSQL
@@ -136,4 +139,5 @@ PostgreSQL umożliwia zastosowanie precyzyjnych i natywnych typów, w tym rygory
 * **Wypozyczenia:** ID_Wypozyczenia : SERIAL PRIMARY KEY, ID_Czytelnika : INTEGER REFERENCES Czytelnicy, ID_Ksiazki : INTEGER REFERENCES Ksiazki, Data_Wypozyczenia : DATE DEFAULT CURRENT_DATE, Da[...]
 
 .. image:: fizyczny_postgres_biblioteka.drawio.png
+   :width: 80%
    :alt: Fizyczny schemat bazy danych opracowany dla silnika PostgreSQL.
