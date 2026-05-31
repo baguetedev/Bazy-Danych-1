@@ -38,12 +38,20 @@ Pliki konfiguracyjne PostgreSQL znajdują się w katalogu danych (``PGDATA``).
 
 **Domyślne lokalizacje:**
 
-| System | Katalog danych |
-|--------|----------------|
-| Linux (RPM/DEB) | ``/var/lib/pgsql/data/`` lub ``/var/lib/postgresql/*/main/`` |
-| Linux (kompilacja źródłowa) | ``/usr/local/pgsql/data/`` |
-| Windows | ``C:\Program Files\PostgreSQL\<version>\data\`` |
-| Docker | ``/var/lib/postgresql/data/`` (w kontenerze) |
+.. list-table:: Domyślne lokalizacje
+   :header-rows: 1
+   :widths: 30 70
+
+   * - System
+     - Katalog danych
+   * - Linux (RPM/DEB)
+     - ``/var/lib/pgsql/data/`` lub ``/var/lib/postgresql/*/main/``
+   * - Linux (kompilacja źródłowa)
+     - ``/usr/local/pgsql/data/``
+   * - Windows
+     - ``C:\Program Files\PostgreSQL\<version>\data\``
+   * - Docker
+     - ``/var/lib/postgresql/data/`` (w kontenerze)
 
 **Zmiana katalogu danych:**
 
@@ -526,4 +534,13 @@ Najlepsze praktyki
 #. Stosuj osobne role administracyjne i aplikacyjne.
 #. Dokumentuj wszystkie mapowania użytkowników.
 #. Regularnie przeglądaj konfigurację dostępu.
+
+
+
+.. admonition:: Opracowanie
+   :class: note
+
+   **Autor:** Michał Kraus 
+   **Przedmiot:** Bazy danych  
+   **Data:** maj 2026
 

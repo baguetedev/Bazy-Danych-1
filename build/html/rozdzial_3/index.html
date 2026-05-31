@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Rozdzial 3: Projektowanie Bazy Danych: System Zarządzania Biblioteką &#8212; Sprawozdanie-z-laboratoriów  documentation</title>
+    <title>Rozdział 3: Projektowanie Bazy Danych: System Zarządzania Biblioteką &#8212; Sprawozdanie-z-laboratoriów  documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
@@ -14,7 +14,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Rozdział 4: Implementacja fizyczna i zasilanie bazy danych" href="../rozdzial_4/index.html" />
-    <link rel="prev" title="Zadania" href="../rozdzial_2/rozdzial_28/source/rozdzial_3/index.html" />
+    <link rel="prev" title="2. Ataki na bazy danych i luki w zabezpieczeniach" href="../rozdzial_2/rozdzial_27/rozdzial_2.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -33,7 +33,7 @@
           <div class="body" role="main">
             
   <section id="rozdzial-3-projektowanie-bazy-danych-system-zarzadzania-biblioteka">
-<h1>Rozdzial 3: Projektowanie Bazy Danych: System Zarządzania Biblioteką<a class="headerlink" href="#rozdzial-3-projektowanie-bazy-danych-system-zarzadzania-biblioteka" title="Link to this heading">¶</a></h1>
+<h1>Rozdział 3: Projektowanie Bazy Danych: System Zarządzania Biblioteką<a class="headerlink" href="#rozdzial-3-projektowanie-bazy-danych-system-zarzadzania-biblioteka" title="Link to this heading">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Autorzy<span class="colon">:</span></dt>
 <dd class="field-odd"><ol class="arabic simple">
@@ -47,16 +47,16 @@
 <section id="wybrane-zagadnienie">
 <h3>Wybrane zagadnienie:<a class="headerlink" href="#wybrane-zagadnienie" title="Link to this heading">¶</a></h3>
 <p>System zarządzania wypożyczeniami w bibliotece.
-Projekt obejmuje obsługę bazy czytelników, katalogu zbiorów bibliotecznych (z uwzględnieniem autorów i kategorii literackich), a także pełen proces ewidencji wypożyczeń, zwrotów oraz historii aktywności czytelnika.</p>
+Projekt obejmuje obsługę bazy czytelników, katalogu zbiorów bibliotecznych (z uwzględnieniem autorów i kategorii literackich), a także pełen proces ewidencji wypożyczeń, zwrotów oraz hi[…]</p>
 </section>
 <section id="opis-procesow-i-wiezy-integralnosci">
 <h3>Opis procesów i więzy integralności:<a class="headerlink" href="#opis-procesow-i-wiezy-integralnosci" title="Link to this heading">¶</a></h3>
 <p>Głównym procesem w systemie jest obieg książki między biblioteką a czytelnikiem.</p>
 <ul class="simple">
 <li><p><strong>Rejestracja:</strong> Czytelnik zapisuje się do biblioteki, podając swoje dane osobowe oraz adresowe. System automatycznie rejestruje datę zapisu.</p></li>
-<li><p><strong>Katalogowanie:</strong> Książki są kategoryzowane (np. Fantastyka, Kryminał, Literatura faktu) i przypisane do konkretnych autorów. Każdy fizyczny egzemplarz książki posiada swój unikalny identyfikator.</p></li>
-<li><p><strong>Wypożyczenia i Zwroty:</strong> Proces wypożyczenia łączy czytelnika z konkretnym egzemplarzem książki w czasie. Rejestrowana jest data wypożyczenia. System zakłada konieczność ewidencji daty zwrotu, by w przyszłości móc naliczać ewentualne kary.</p></li>
-<li><p><strong>Statystyki (Więzy integralności):</strong> Pola takie jak “aktualne wypożyczenia” i “suma wypożyczeń” z pierwotnego prototypu są wartościami wyliczalnymi (pochodnymi) na podstawie historii transakcji, co w docelowym modelu gwarantuje spójność danych.</p></li>
+<li><p><strong>Katalogowanie:</strong> Książki są kategoryzowane (np. Fantastyka, Kryminał, Literatura faktu) i przypisane do konkretnych autorów. Każdy fizyczny egzemplarz książki posiada swój unikalny id[…]</p></li>
+<li><p><strong>Wypożyczenia i Zwroty:</strong> Proces wypożyczenia łączy czytelnika z konkretnym egzemplarzem książki w czasie. Rejestrowana jest data wypożyczenia. System zakłada konieczność ewidencji da[…]</p></li>
+<li><p><strong>Statystyki (Więzy integralności):</strong> Pola takie jak “aktualne wypożyczenia” i “suma wypożyczeń” z pierwotnego prototypu są wartościami wyliczalnymi (pochodnymi) na podstawie historii tra[…]</p></li>
 </ul>
 </section>
 <section id="wykaz-gromadzonych-danych">
@@ -114,12 +114,12 @@ Projekt obejmuje obsługę bazy czytelników, katalogu zbiorów bibliotecznych (
 </section>
 <section id="identyfikacja-encji-slabych">
 <h3>Identyfikacja encji słabych<a class="headerlink" href="#identyfikacja-encji-slabych" title="Link to this heading">¶</a></h3>
-<p>Występuje relacja wiele-do-wielu (M:N) między Czytelnikiem a Książką (czytelnik czyta wiele książek, książka jest czytana przez wielu czytelników). Związek ten rozwiązywany jest przez encję asocjacyjną (słabą) <strong>Wypożyczenie</strong>.
+<p>Występuje relacja wiele-do-wielu (M:N) między Czytelnikiem a Książką (czytelnik czyta wiele książek, książka jest czytana przez wielu czytelników). Związek ten rozwiązywany jest przez […]
 * <strong>Uzasadnienie:</strong> Byt ten nie istnieje samodzielnie w oderwaniu od konkretnego Czytelnika i konkretnej Książki.</p>
 </section>
 <section id="schemat-w-notacji-chena">
 <h3>Schemat w notacji Chena<a class="headerlink" href="#schemat-w-notacji-chena" title="Link to this heading">¶</a></h3>
-<img alt="Model konceptualny bazy danych biblioteki (Schemat Chena)." src="../_images/model_konceptualny_biblioteka1.png" />
+<img alt="Model konceptualny bazy danych biblioteki (Schemat Chena)." src="../_images/model_konceptualny_biblioteka.png" />
 </section>
 </section>
 <section id="model-logiczny-i-proces-normalizacji">
@@ -131,9 +131,9 @@ Wiersze są unikalne, tworzymy sztuczne klucze główne (ID_Wypozyczenia). Warto
 <p><strong>Krok 2: Druga Postać Normalna (2NF)</strong>
 Rozbijamy płaską strukturę względem częściowych zależności. Oddzielamy encje twarde od operacji.
 Tworzymy bazowe tabele: <code class="docutils literal notranslate"><span class="pre">Czytelnicy</span></code> oraz <code class="docutils literal notranslate"><span class="pre">Ksiazki</span></code>. Powstaje tabela <code class="docutils literal notranslate"><span class="pre">Wypozyczenia</span></code> przechowująca klucze obce ID_Czytelnika oraz ID_Ksiazki, a także daty transakcji.
-<em>Uwaga:</em> Dynamiczne atrybuty takie jak “suma wypożyczeń” z pierwotnego zadania są usuwane ze schematu, ponieważ łamią zasady normalizacji – można je obliczyć zapytaniem SQL typu <code class="docutils literal notranslate"><span class="pre">COUNT()</span></code>.</p>
+<em>Uwaga:</em> Dynamiczne atrybuty takie jak “suma wypożyczeń” z pierwotnego zadania są usuwane ze schematu, ponieważ łamią zasady normalizacji – można je obliczyć zapytaniem SQL typu <a href="#id1"><span class="problematic" id="id2">``</span></a>COUNT([…]</p>
 <p><strong>Krok 3: Trzecia Postać Normalna (3NF)</strong>
-Eliminacja zależności przechodnich. Z tabeli <code class="docutils literal notranslate"><span class="pre">Ksiazki</span></code> wydzielamy powtarzające się nazwy gatunków do tabeli <code class="docutils literal notranslate"><span class="pre">Kategorie</span></code> (klucz: ID_Kategorii) oraz dane twórców do tabeli <code class="docutils literal notranslate"><span class="pre">Autorzy</span></code> (klucz: ID_Autora).</p>
+Eliminacja zależności przechodnich. Z tabeli <code class="docutils literal notranslate"><span class="pre">Ksiazki</span></code> wydzielamy powtarzające się nazwy gatunków do tabeli <code class="docutils literal notranslate"><span class="pre">Kategorie</span></code> (klucz: ID_Kategorii) oraz dane twórców do tabeli <code class="docutils literal notranslate"><span class="pre">Autorzy</span></code> (kl[…]</p>
 </section>
 <section id="ostateczna-struktura-tabel-3nf">
 <h3>Ostateczna struktura tabel (3NF)<a class="headerlink" href="#ostateczna-struktura-tabel-3nf" title="Link to this heading">¶</a></h3>
@@ -147,7 +147,7 @@ Eliminacja zależności przechodnich. Z tabeli <code class="docutils literal not
 </section>
 <section id="diagram-erd-model-logiczny">
 <h3>Diagram ERD (Model Logiczny)<a class="headerlink" href="#diagram-erd-model-logiczny" title="Link to this heading">¶</a></h3>
-<img alt="Diagram logiczny ERD bazy danych biblioteki (Postać 3NF)." src="../_images/erd_logiczny_biblioteka1.png" />
+<img alt="Diagram logiczny ERD bazy danych biblioteki (Postać 3NF)." src="../_images/erd_logiczny_biblioteka.png" />
 </section>
 </section>
 <section id="model-fizyczny-bazy-danych">
@@ -163,19 +163,19 @@ Eliminacja zależności przechodnich. Z tabeli <code class="docutils literal not
 <li><p><strong>Ksiazki:</strong> ID_Ksiazki : INTEGER PRIMARY KEY, ID_Autora : INTEGER, ID_Kategorii : INTEGER, Tytul : TEXT, Rok_Wydania : INTEGER</p></li>
 <li><p><strong>Wypozyczenia:</strong> ID_Wypozyczenia : INTEGER PRIMARY KEY, ID_Czytelnika : INTEGER, ID_Ksiazki : INTEGER, Data_Wypozyczenia : TEXT, Data_Zwrotu : TEXT</p></li>
 </ul>
-<img alt="Fizyczny schemat bazy danych dla silnika SQLite." src="../_images/fizyczny_sqlite_biblioteka1.png" />
+<img alt="Fizyczny schemat bazy danych dla silnika SQLite." src="../_images/fizyczny_sqlite_biblioteka.png" />
 </section>
 <section id="model-fizyczny-dla-srodowiska-postgresql">
 <h3>Model fizyczny dla środowiska PostgreSQL<a class="headerlink" href="#model-fizyczny-dla-srodowiska-postgresql" title="Link to this heading">¶</a></h3>
 <p>PostgreSQL umożliwia zastosowanie precyzyjnych i natywnych typów, w tym rygorystycznych typów daty (DATE) oraz optymalizacji pamięciowej dla ciągów znaków (VARCHAR).</p>
 <ul class="simple">
-<li><p><strong>Czytelnicy:</strong> ID_Czytelnika : SERIAL PRIMARY KEY, Imie : VARCHAR(50), Nazwisko : VARCHAR(50), Ulica : VARCHAR(100), Kod_Pocztowy : VARCHAR(6), Miasto : VARCHAR(50), Data_Zapisu : DATE DEFAULT CURRENT_DATE</p></li>
+<li><p><strong>Czytelnicy:</strong> ID_Czytelnika : SERIAL PRIMARY KEY, Imie : VARCHAR(50), Nazwisko : VARCHAR(50), Ulica : VARCHAR(100), Kod_Pocztowy : VARCHAR(6), Miasto : VARCHAR(50), Data_Zapisu : DATE DEFAULT[…]</p></li>
 <li><p><strong>Autorzy:</strong> ID_Autora : SERIAL PRIMARY KEY, Imie : VARCHAR(50), Nazwisko : VARCHAR(50)</p></li>
 <li><p><strong>Kategorie:</strong> ID_Kategorii : SERIAL PRIMARY KEY, Nazwa_Kategorii : VARCHAR(50)</p></li>
 <li><p><strong>Ksiazki:</strong> ID_Ksiazki : SERIAL PRIMARY KEY, ID_Autora : INTEGER REFERENCES Autorzy, ID_Kategorii : INTEGER REFERENCES Kategorie, Tytul : VARCHAR(150), Rok_Wydania : SMALLINT</p></li>
-<li><p><strong>Wypozyczenia:</strong> ID_Wypozyczenia : SERIAL PRIMARY KEY, ID_Czytelnika : INTEGER REFERENCES Czytelnicy, ID_Ksiazki : INTEGER REFERENCES Ksiazki, Data_Wypozyczenia : DATE DEFAULT CURRENT_DATE, Data_Zwrotu : DATE</p></li>
+<li><p><strong>Wypozyczenia:</strong> ID_Wypozyczenia : SERIAL PRIMARY KEY, ID_Czytelnika : INTEGER REFERENCES Czytelnicy, ID_Ksiazki : INTEGER REFERENCES Ksiazki, Data_Wypozyczenia : DATE DEFAULT CURRENT_DATE, Da[…]</p></li>
 </ul>
-<img alt="Fizyczny schemat bazy danych opracowany dla silnika PostgreSQL." src="../_images/fizyczny_postgres_biblioteka.drawio1.png" />
+<img alt="Fizyczny schemat bazy danych opracowany dla silnika PostgreSQL." src="../_images/fizyczny_postgres_biblioteka.drawio.png" />
 </section>
 </section>
 </section>
@@ -201,7 +201,7 @@ Eliminacja zależności przechodnich. Z tabeli <code class="docutils literal not
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../rozdzial_1/index.html">Rozdział 1: Kontrola i konserwacja</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rozdzial_2/index.html">Badania literaturowe</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Rozdzial 3: Projektowanie Bazy Danych: System Zarządzania Biblioteką</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Rozdział 3: Projektowanie Bazy Danych: System Zarządzania Biblioteką</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#wybor-zagadnienia-opis-procesow-i-danych">Wybór zagadnienia, opis procesów i danych</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#prototyp-csv">Prototyp CSV</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#model-konceptualny-pojeciowy">Model Konceptualny (Pojęciowy)</a></li>
@@ -216,7 +216,7 @@ Eliminacja zależności przechodnich. Z tabeli <code class="docutils literal not
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="../rozdzial_2/rozdzial_28/source/rozdzial_3/index.html" title="previous chapter">Zadania</a></li>
+      <li>Previous: <a href="../rozdzial_2/rozdzial_27/rozdzial_2.html" title="previous chapter">2. Ataki na bazy danych i luki w zabezpieczeniach</a></li>
       <li>Next: <a href="../rozdzial_4/index.html" title="next chapter">Rozdział 4: Implementacja fizyczna i zasilanie bazy danych</a></li>
   </ul></li>
 </ul>
