@@ -1,8 +1,12 @@
-#!/bin/bash
+k#!/bin/bash
 
 # Ustawienie ścieżki do Twojego projektu
 PROJEKT_DIR="/home/student15/gitstuiff/Bazy-Danych-1"
 cd "$PROJEKT_DIR" || exit
+
+# 0. ZABEZPIECZENIE: Pobranie najnowszych zmian z GitHuba przed pracą
+echo ">>> Synchronizacja lokalnego repozytorium z GitHubem..."
+git pull --rebase --no-recurse-submodules origin main
 
 # Twój sprawdzony link do surowych danych CSV z Arkusza
 LINK_CSV="https://docs.google.com/spreadsheets/d/e/2PACX-1vTq8qlrUea8l8lVkCEzqDy45oepDUm8kmL7hrploPt_suOFkJAK8uwGfodrXKy1XLm1kRHD9UflCw1Z/pub?gid=0&single=true&output=csv"
@@ -28,7 +32,8 @@ done
 
 # 3. AKTUALIZACJA WSZYSTKICH ISTNIEJĄCYCH (Dociąganie poprawek od kumpli)
 echo ">>> Sprawdzam aktualizacje u wszystkich ziomków..."
-git submodule update --remote --recursive
+# Usunięto flagę --recursive, aby ignorować zepsute, zagnieżdżone submoduły u innych
+git submodule update --remote
 
 # 4. DECYZJA O WYSYŁCE: Jeśli są nowe osoby LUB ktoś coś zmienił w tekście
 if [ -n "$(git status --porcelain)" ]; then
@@ -56,6 +61,8 @@ EOF
     # Wysyłka na GitHuba
     git add .
     git commit -m "Terminator: Globalna aktualizacja treści i submodułów"
+    # Ostatnia deska ratunku przed pushem, gdyby ktoś wypchnął coś dosłownie w tej samej sekundzie
+    git pull --rebase --no-recurse-submodules origin main
     git push
     echo ">>> Wszystko zsynchronizowane!"
 else
