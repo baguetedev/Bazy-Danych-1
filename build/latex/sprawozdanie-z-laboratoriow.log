@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.3.1)  8 JUN 2026 17:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.3.1)  8 JUN 2026 17:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -918,14 +918,14 @@ File: ts1txtt.fd 2000/12/15 v3.1
 )
 
 [3]
+
+[4]
 Chapter 2.
 
 
-[4
+[5
 
 ]
-
-[5]
 
 [6]
 
@@ -936,11 +936,13 @@ Chapter 2.
 [9]
 
 [10]
+
+[11]
 LaTeX Font Info:    Trying to load font information for U+fontawesomefree1 on i
 nput line 1176.
  (/usr/share/texlive/texmf-dist/tex/latex/fontawesome5/ufontawesomefree1.fd)
 
-[11{/usr/share/texlive/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free1.enc}]
+[12{/usr/share/texlive/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free1.enc}]
 Underfull \hbox (badness 10000) in paragraph at lines 1272--1274
 \T1/qtm/m/n/10.95 Bez-piecze«stwo danych stanowi ab-so-lutny pri-o-ry-tet ka»de
 j ad-min-is-tracji sys-temami in-for-maty-cznymi.
@@ -948,7 +950,7 @@ j ad-min-is-tracji sys-temami in-for-maty-cznymi.
 
 
 
-[12]
+[13]
 Underfull \hbox (badness 10000) in paragraph at lines 1355--1358
 [][][][][]\T1/qtm/m/n/9 Oracle Doc-u-men-ta-tion, \T1/qtm/m/it/9 AU-DIT_TRAIL \
 T1/qtm/m/n/9 oraz in-for-ma-cje o uni-fied au-dit-ing, [][]$https : / / docs . 
@@ -956,8 +958,6 @@ oracle . com / en / database / oracle /
  []
 
 
-
-[13]
 
 [14]
 
@@ -968,13 +968,15 @@ oracle . com / en / database / oracle /
 [17]
 
 [18]
+
+[19]
 Chapter 3.
 
 
-[19
+[20
 
 ]
-<model_konceptualny_biblioteka.png, id=629, 1891.065pt x 1276.77pt>
+<model_konceptualny_biblioteka.png, id=633, 1891.065pt x 1276.77pt>
 File: model_konceptualny_biblioteka.png Graphic file (type png)
 <use model_konceptualny_biblioteka.png>
 Package pdftex.def Info: model_konceptualny_biblioteka.png  used on input line 
@@ -982,22 +984,22 @@ Package pdftex.def Info: model_konceptualny_biblioteka.png  used on input line
 (pdftex.def)             Requested size: 397.06577pt x 268.07117pt.
 
 
-[20]
-<erd_logiczny_biblioteka.png, id=635, 712.91344pt x 181.42781pt>
+[21]
+<erd_logiczny_biblioteka.png, id=639, 712.91344pt x 181.42781pt>
 File: erd_logiczny_biblioteka.png Graphic file (type png)
 <use erd_logiczny_biblioteka.png>
 Package pdftex.def Info: erd_logiczny_biblioteka.png  used on input line 1893.
 (pdftex.def)             Requested size: 397.06577pt x 101.04797pt.
 
 
-[21 <./model_konceptualny_biblioteka.png>]
-<fizyczny_sqlite_biblioteka.png, id=642, 828.84656pt x 181.42781pt>
+[22 <./model_konceptualny_biblioteka.png>]
+<fizyczny_sqlite_biblioteka.png, id=646, 828.84656pt x 181.42781pt>
 File: fizyczny_sqlite_biblioteka.png Graphic file (type png)
 <use fizyczny_sqlite_biblioteka.png>
 Package pdftex.def Info: fizyczny_sqlite_biblioteka.png  used on input line 192
 9.
 (pdftex.def)             Requested size: 397.06577pt x 86.91272pt.
-<fizyczny_postgres_biblioteka.drawio.png, id=643, 889.07156pt x 181.42781pt>
+<fizyczny_postgres_biblioteka.drawio.png, id=647, 889.07156pt x 181.42781pt>
 File: fizyczny_postgres_biblioteka.drawio.png Graphic file (type png)
 <use fizyczny_postgres_biblioteka.drawio.png>
 Package pdftex.def Info: fizyczny_postgres_biblioteka.drawio.png  used on input
@@ -1005,32 +1007,59 @@ Package pdftex.def Info: fizyczny_postgres_biblioteka.drawio.png  used on input
 (pdftex.def)             Requested size: 397.06577pt x 81.02718pt.
 
 
-[22 <./erd_logiczny_biblioteka.png> <./fizyczny_sqlite_biblioteka.png> <./fizyc
+[23 <./erd_logiczny_biblioteka.png> <./fizyczny_sqlite_biblioteka.png> <./fizyc
 zny_postgres_biblioteka.drawio.png>]
 Chapter 4.
 
 
-[23
+[24
 
 ]
 
-[24] (./sprawozdanie-z-laboratoriow.ind)
+! LaTeX Error: Unicode character ï¿½ (U+FFFD)
+               not set up for use with LaTeX.
 
-[25] (./sprawozdanie-z-laboratoriow.aux)
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2080 ... bezpiecznego zarzÄ…dzania transakcjami}
+                                                  
+? 
+
+! LaTeX Error: Unicode character ï¿½ (U+FFFD)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2080 ... bezpiecznego zarzÄ…dzania transakcjami}
+                                                  
+? 
+
+
+[25] (./sprawozdanie-z-laboratoriow.ind)
+
+[26] (./sprawozdanie-z-laboratoriow.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `sprawozdanie-z-laboratoriow.out' has not cha
 nged.
 (rerunfilecheck)             Checksum: 54774A984A1FD70064631B9E8D470975;20009.
  ) 
 Here is how much of TeX's memory you used:
- 20665 strings out of 473197
- 371957 string characters out of 5718606
- 803139 words of memory out of 5000000
- 43310 multiletter control sequences out of 15000+600000
- 628017 words of font info for 105 fonts, out of 8000000 for 9000
+ 20664 strings out of 473197
+ 371928 string characters out of 5718606
+ 801139 words of memory out of 5000000
+ 43309 multiletter control sequences out of 15000+600000
+ 627639 words of font info for 104 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
  72i,12n,82p,1216b,674s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/fontawesome5/FontAwesome5Fr
@@ -1043,10 +1072,10 @@ fonts/type1/public/tex-gyre/qtmri.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/t
 xfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xt
 t.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/tcxtt.pfb>
-Output written on sprawozdanie-z-laboratoriow.pdf (28 pages, 2514438 bytes).
+Output written on sprawozdanie-z-laboratoriow.pdf (29 pages, 2515729 bytes).
 PDF statistics:
- 753 PDF objects out of 1000 (max. 8388607)
- 687 compressed objects within 7 object streams
- 172 named destinations out of 1000 (max. 500000)
+ 754 PDF objects out of 1000 (max. 8388607)
+ 688 compressed objects within 7 object streams
+ 173 named destinations out of 1000 (max. 500000)
  793 words of extra memory for PDF output out of 10000 (max. 10000000)
 

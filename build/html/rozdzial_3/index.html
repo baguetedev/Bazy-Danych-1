@@ -47,16 +47,16 @@
 <section id="wybrane-zagadnienie">
 <h3><span class="section-number">3.1.1. </span>Wybrane zagadnienie:<a class="headerlink" href="#wybrane-zagadnienie" title="Link to this heading">¶</a></h3>
 <p>System zarządzania wypożyczeniami w bibliotece.
-Projekt obejmuje obsługę bazy czytelników, katalogu zbiorów bibliotecznych (z uwzględnieniem autorów i kategorii literackich), a także pełen proces ewidencji wypożyczeń, zwrotów oraz hi[…]</p>
+Projekt obejmuje obsługę bazy czytelników, katalogu zbiorów bibliotecznych (z uwzględnieniem autorów i kategorii literackich), a także pełen proces ewidencji wypożyczeń, zwrotów oraz historii operacji każdego użytkownika.</p>
 </section>
 <section id="opis-procesow-i-wiezy-integralnosci">
 <h3><span class="section-number">3.1.2. </span>Opis procesów i więzy integralności:<a class="headerlink" href="#opis-procesow-i-wiezy-integralnosci" title="Link to this heading">¶</a></h3>
 <p>Głównym procesem w systemie jest obieg książki między biblioteką a czytelnikiem.</p>
 <ul class="simple">
 <li><p><strong>Rejestracja:</strong> Czytelnik zapisuje się do biblioteki, podając swoje dane osobowe oraz adresowe. System automatycznie rejestruje datę zapisu.</p></li>
-<li><p><strong>Katalogowanie:</strong> Książki są kategoryzowane (np. Fantastyka, Kryminał, Literatura faktu) i przypisane do konkretnych autorów. Każdy fizyczny egzemplarz książki posiada swój unikalny id[…]</p></li>
-<li><p><strong>Wypożyczenia i Zwroty:</strong> Proces wypożyczenia łączy czytelnika z konkretnym egzemplarzem książki w czasie. Rejestrowana jest data wypożyczenia. System zakłada konieczność ewidencji da[…]</p></li>
-<li><p><strong>Statystyki (Więzy integralności):</strong> Pola takie jak “aktualne wypożyczenia” i “suma wypożyczeń” z pierwotnego prototypu są wartościami wyliczalnymi (pochodnymi) na podstawie historii tra[…]</p></li>
+<li><p><strong>Katalogowanie:</strong> Książki są kategoryzowane (np. Fantastyka, Kryminał, Literatura faktu) i przypisane do konkretnych autorów. Każdy fizyczny egzemplarz książki posiada swój unikalny identyfikator, co umożliwia śledzenie niezależnie każdego egzemplarza.</p></li>
+<li><p><strong>Wypożyczenia i Zwroty:</strong> Proces wypożyczenia łączy czytelnika z konkretnym egzemplarzem książki w czasie. Rejestrowana jest data wypożyczenia. System zakłada konieczność ewidencji dokładnej daty zwrotu rzeczywistego, co pozwala na analizy przeterminowanych wypożyczeń i wzorców korzystania z kolekcji.</p></li>
+<li><p><strong>Statystyki (Więzy integralności):</strong> Pola takie jak “aktualne wypożyczenia” i “suma wypożyczeń” z pierwotnego prototypu są wartościami wyliczalnymi (pochodnymi) na podstawie historii transakcji i są usuwane ze schematu normalnego.</p></li>
 </ul>
 </section>
 <section id="wykaz-gromadzonych-danych">
@@ -114,7 +114,7 @@ Projekt obejmuje obsługę bazy czytelników, katalogu zbiorów bibliotecznych (
 </section>
 <section id="identyfikacja-encji-slabych">
 <h3><span class="section-number">3.3.4. </span>Identyfikacja encji słabych<a class="headerlink" href="#identyfikacja-encji-slabych" title="Link to this heading">¶</a></h3>
-<p>Występuje relacja wiele-do-wielu (M:N) między Czytelnikiem a Książką (czytelnik czyta wiele książek, książka jest czytana przez wielu czytelników). Związek ten rozwiązywany jest przez […]
+<p>Występuje relacja wiele-do-wielu (M:N) między Czytelnikiem a Książką (czytelnik czyta wiele książek, książka jest czytana przez wielu czytelników). Związek ten rozwiązywany jest przez encję asocjacyjną <strong>Wypożyczenia</strong>, która przechowuje wszystkie historyczne i bieżące transakcje między dwoma stronami.
 * <strong>Uzasadnienie:</strong> Byt ten nie istnieje samodzielnie w oderwaniu od konkretnego Czytelnika i konkretnej Książki.</p>
 </section>
 <section id="schemat-w-notacji-chena">
@@ -132,9 +132,9 @@ Wiersze są unikalne, tworzymy sztuczne klucze główne (ID_Wypozyczenia). Warto
 <p><strong>Krok 2: Druga Postać Normalna (2NF)</strong>
 Rozbijamy płaską strukturę względem częściowych zależności. Oddzielamy encje twarde od operacji.
 Tworzymy bazowe tabele: <code class="docutils literal notranslate"><span class="pre">Czytelnicy</span></code> oraz <code class="docutils literal notranslate"><span class="pre">Ksiazki</span></code>. Powstaje tabela <code class="docutils literal notranslate"><span class="pre">Wypozyczenia</span></code> przechowująca klucze obce ID_Czytelnika oraz ID_Ksiazki, a także daty transakcji.
-<em>Uwaga:</em> Dynamiczne atrybuty takie jak “suma wypożyczeń” z pierwotnego zadania są usuwane ze schematu, ponieważ łamią zasady normalizacji – można je obliczyć zapytaniem SQL typu <a href="#id1"><span class="problematic" id="id2">``</span></a>COUNT([…]</p>
+<em>Uwaga:</em> Dynamiczne atrybuty takie jak “suma wypożyczeń” z pierwotnego zadania są usuwane ze schematu, ponieważ łamią zasady normalizacji – można je obliczyć zapytaniem SQL typu <code class="docutils literal notranslate"><span class="pre">COUNT(*)</span></code> na zdarzeniach w tabeli <code class="docutils literal notranslate"><span class="pre">Wypozyczenia</span></code>.</p>
 <p><strong>Krok 3: Trzecia Postać Normalna (3NF)</strong>
-Eliminacja zależności przechodnich. Z tabeli <code class="docutils literal notranslate"><span class="pre">Ksiazki</span></code> wydzielamy powtarzające się nazwy gatunków do tabeli <code class="docutils literal notranslate"><span class="pre">Kategorie</span></code> (klucz: ID_Kategorii) oraz dane twórców do tabeli <code class="docutils literal notranslate"><span class="pre">Autorzy</span></code> (kl[…]</p>
+Eliminacja zależności przechodnich. Z tabeli <code class="docutils literal notranslate"><span class="pre">Ksiazki</span></code> wydzielamy powtarzające się nazwy gatunków do tabeli <code class="docutils literal notranslate"><span class="pre">Kategorie</span></code> (klucz: ID_Kategorii) oraz dane twórców do tabeli <code class="docutils literal notranslate"><span class="pre">Autorzy</span></code> (klucz: ID_Autora). Każda tabela reprezentuje teraz niezależną encję o jasno określonym celu biznesowym.</p>
 </section>
 <section id="ostateczna-struktura-tabel-3nf">
 <h3><span class="section-number">3.4.2. </span>Ostateczna struktura tabel (3NF)<a class="headerlink" href="#ostateczna-struktura-tabel-3nf" title="Link to this heading">¶</a></h3>
@@ -172,11 +172,11 @@ Eliminacja zależności przechodnich. Z tabeli <code class="docutils literal not
 <h3><span class="section-number">3.5.2. </span>Model fizyczny dla środowiska PostgreSQL<a class="headerlink" href="#model-fizyczny-dla-srodowiska-postgresql" title="Link to this heading">¶</a></h3>
 <p>PostgreSQL umożliwia zastosowanie precyzyjnych i natywnych typów, w tym rygorystycznych typów daty (DATE) oraz optymalizacji pamięciowej dla ciągów znaków (VARCHAR).</p>
 <ul class="simple">
-<li><p><strong>Czytelnicy:</strong> ID_Czytelnika : SERIAL PRIMARY KEY, Imie : VARCHAR(50), Nazwisko : VARCHAR(50), Ulica : VARCHAR(100), Kod_Pocztowy : VARCHAR(6), Miasto : VARCHAR(50), Data_Zapisu : DATE DEFAULT[…]</p></li>
+<li><p><strong>Czytelnicy:</strong> ID_Czytelnika : SERIAL PRIMARY KEY, Imie : VARCHAR(50), Nazwisko : VARCHAR(50), Ulica : VARCHAR(100), Kod_Pocztowy : VARCHAR(6), Miasto : VARCHAR(50), Data_Zapisu : DATE DEFAULT CURRENT_DATE</p></li>
 <li><p><strong>Autorzy:</strong> ID_Autora : SERIAL PRIMARY KEY, Imie : VARCHAR(50), Nazwisko : VARCHAR(50)</p></li>
 <li><p><strong>Kategorie:</strong> ID_Kategorii : SERIAL PRIMARY KEY, Nazwa_Kategorii : VARCHAR(50)</p></li>
 <li><p><strong>Ksiazki:</strong> ID_Ksiazki : SERIAL PRIMARY KEY, ID_Autora : INTEGER REFERENCES Autorzy, ID_Kategorii : INTEGER REFERENCES Kategorie, Tytul : VARCHAR(150), Rok_Wydania : SMALLINT</p></li>
-<li><p><strong>Wypozyczenia:</strong> ID_Wypozyczenia : SERIAL PRIMARY KEY, ID_Czytelnika : INTEGER REFERENCES Czytelnicy, ID_Ksiazki : INTEGER REFERENCES Ksiazki, Data_Wypozyczenia : DATE DEFAULT CURRENT_DATE, Da[…]</p></li>
+<li><p><strong>Wypozyczenia:</strong> ID_Wypozyczenia : SERIAL PRIMARY KEY, ID_Czytelnika : INTEGER REFERENCES Czytelnicy, ID_Ksiazki : INTEGER REFERENCES Ksiazki, Data_Wypozyczenia : DATE DEFAULT CURRENT_DATE, Data_Zwrotu : DATE</p></li>
 </ul>
 <a class="reference internal image-reference" href="../_images/fizyczny_postgres_biblioteka.drawio.png"><img alt="Fizyczny schemat bazy danych opracowany dla silnika PostgreSQL." src="../_images/fizyczny_postgres_biblioteka.drawio.png" style="width: 80%;" />
 </a>

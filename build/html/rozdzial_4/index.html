@@ -43,10 +43,10 @@
 </dl>
 <section id="definicja-fizyczna-bazy-danych-zadanie-1">
 <h2><span class="section-number">4.1. </span>Definicja fizyczna bazy danych (Zadanie 1)<a class="headerlink" href="#definicja-fizyczna-bazy-danych-zadanie-1" title="Link to this heading">¶</a></h2>
-<p>Na podstawie opracowanych wcześniej modeli logicznych przygotowano skrypty DDL (Data Definition Language) dla dwóch docelowych silników relacyjnych baz danych: PostgreSQL oraz SQLite. Kody te p[…]</p>
+<p>Na podstawie opracowanych wcześniej modeli logicznych przygotowano skrypty DDL (Data Definition Language) dla dwóch docelowych silników relacyjnych baz danych: PostgreSQL oraz SQLite. Kody te przygotowały solidną fundamentę dla skutecznego przechowywania i zarządzania danymi biblioteki.</p>
 <section id="skrypt-dla-srodowiska-postgresql">
 <h3><span class="section-number">4.1.1. </span>Skrypt dla środowiska PostgreSQL<a class="headerlink" href="#skrypt-dla-srodowiska-postgresql" title="Link to this heading">¶</a></h3>
-<p>Środowisko PostgreSQL pozwala na wykorzystanie zaawansowanych, natywnych typów danych oraz rygorystyczne egzekwowanie więzów integralności. W poniższym skrypcie kluczowym elementem jest uży[…]</p>
+<p>Środowisko PostgreSQL pozwala na wykorzystanie zaawansowanych, natywnych typów danych oraz rygorystyczne egzekwowanie więzów integralności. W poniższym skrypcie kluczowym elementem jest użycie więzów klucza obcego (FOREIGN KEY) w celu zapewnienia spójności referencyalnej między tabelami.</p>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Fragment kodu definicji kluczowych tabel (PostgreSQL)</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Ksiazki</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">ID_Ksiazki</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
@@ -68,7 +68,7 @@
 </section>
 <section id="skrypt-dla-srodowiska-sqlite">
 <h3><span class="section-number">4.1.2. </span>Skrypt dla środowiska SQLite<a class="headerlink" href="#skrypt-dla-srodowiska-sqlite" title="Link to this heading">¶</a></h3>
-<p>W silniku SQLite struktura ulega pewnemu uproszczeniu z powodu mniejszej rygorystyczności typowania oraz bardzo ograniczonej liczby wbudowanych klas typów danych (np. brak odrębnego typu daty).[…]</p>
+<p>W silniku SQLite struktura ulega pewnemu uproszczeniu z powodu mniejszej rygorystyczności typowania oraz bardzo ograniczonej liczby wbudowanych klas typów danych (np. brak odrębnego typu daty). Pomimo ograniczeń, SQLite pozostaje niezawodnym rozwiązaniem do prototypowania i mniejszych aplikacji.</p>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Fragment kodu definicji kluczowych tabel (SQLite)</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Wypozyczenia</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">ID_Wypozyczenia</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTOINCREMENT</span><span class="p">,</span>
@@ -88,7 +88,7 @@
 <p>Posiadając gotową strukturę bazy, należało wyposażyć ją w dane demonstracyjne. Przygotowano zbiór danych testowych, które zostały poddane wsadowemu ładowaniu (batch import).</p>
 <section id="formatyzacja-danych-pliki-csv">
 <h3><span class="section-number">4.2.1. </span>Formatyzacja danych (Pliki CSV)<a class="headerlink" href="#formatyzacja-danych-pliki-csv" title="Link to this heading">¶</a></h3>
-<p>Dane do importu przygotowano w niezależnym formacie płaskim CSV (Comma-Separated Values). Takie podejście pozwala na łatwą edycję danych poza systemem bazodanowym. Poniżej zaprezentowano wy[…]</p>
+<p>Dane do importu przygotowano w niezależnym formacie płaskim CSV (Comma-Separated Values). Takie podejście pozwala na łatwą edycję danych poza systemem bazodanowym. Poniżej zaprezentowano wybrane kategorie książek przygotowane w formacie CSV.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Nazwa_Kategorii
 Fantastyka
 Kryminał
@@ -100,8 +100,8 @@ Horror
 </section>
 <section id="implementacja-mechanizmu-importu">
 <h3><span class="section-number">4.2.2. </span>Implementacja mechanizmu importu<a class="headerlink" href="#implementacja-mechanizmu-importu" title="Link to this heading">¶</a></h3>
-<p>Do zaimportowania powyższych danych wybrano mechanizm wprowadzania wielowartościowego oparty na technice <strong>INSERT (multi-value/batch)</strong>. Rozwiązanie zrealizowano z wykorzystaniem języka Python[…]</p>
-<p>Wybór tego mechanizmu podyktowany jest kompromisem między uniwersalnością a wydajnością. Użycie metody <code class="docutils literal notranslate"><span class="pre">executemany()</span></code> na obiekcie kursora bazy danych pozwala na szybkie wstawienie wielu […]</p>
+<p>Do zaimportowania powyższych danych wybrano mechanizm wprowadzania wielowartościowego oparty na technice <strong>INSERT (multi-value/batch)</strong>. Rozwiązanie zrealizowano z wykorzystaniem języka Python wraz z biblioteką psycopg do komunikacji z bazą PostgreSQL.</p>
+<p>Wybór tego mechanizmu podyktowany jest kompromisem między uniwersalnością a wydajnością. Użycie metody <code class="docutils literal notranslate"><span class="pre">executemany()</span></code> na obiekcie kursora bazy danych pozwala na szybkie wstawienie wielu rekordów bez konieczności wykonywania zapytania dla każdego wiersza osobno.</p>
 <p>Poniżej przedstawiono fragment skryptu aplikacyjnego odpowiedzialnego za odczyt z pliku i zasilenie tabel:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">csv</span>
 <span class="kn">import</span> <span class="nn">psycopg</span>
@@ -119,7 +119,7 @@ Horror
 <span class="c1"># 2. Właściwy proces wsadowego importu do bazy PostgreSQL</span>
 <span class="k">def</span> <span class="nf">importuj_do_postgres</span><span class="p">(</span><span class="n">kategorie_do_importu</span><span class="p">,</span> <span class="n">db_config</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="c1"># Użycie Context Managera dla bezpiecznego zarządzania transakcjami</span>
+        <span class="c1"># U��ycie Context Managera dla bezpiecznego zarządzania transakcjami</span>
         <span class="k">with</span> <span class="n">psycopg</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="o">**</span><span class="n">db_config</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
             <span class="k">with</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
 
@@ -139,11 +139,11 @@ Horror
 </section>
 <section id="podsumowanie">
 <h2><span class="section-number">4.3. </span>Podsumowanie<a class="headerlink" href="#podsumowanie" title="Link to this heading">¶</a></h2>
-<p>Niniejszy rozdział wieńczy etap projektowania i wdrażania struktury relacyjnej bazy danych dla systemu zarządzania biblioteką. Poprzez transformację modelu logicznego do postaci fizycznej oraz realizację mechanizmów zasilania, udało się stworzyć w pełni funkcjonalną infrastrukturę bazodanową obsługującą złożone procesy biblioteczne.</p>
-<p>Pierwsza część rozdziału koncentrowała się na <strong>Definicji fizycznej bazy danych (Zadanie 1)</strong>, gdzie dokonano implementacji schematów dla dwóch wiodących silników relacyjnych: PostgreSQL i SQLite. Dla środowiska PostgreSQL przygotowano zaawansowane skrypty DDL (Data Definition Language) wykorzystujące natywne typy danych i rygorystyczne więzy integralności, obejmujące tabele takie jak Ksiazki, Wypozyczenia, Autorzy, Kategorie i Czytelnicy. W przypadku SQLite, schemat został zoptymalizowany pod względem jego ograniczeń typowania, zachowując jednocześnie funkcjonalność systemu poprzez jawne deklaracje kluczy obcych.</p>
-<p>Druga część rozdziału poświęcona została <strong>Mechanizmowi zasilania bazy danych (Zadanie 2)</strong>. Dane demonstracyjne przygotowano w formacie CSV, który zapewnia elastyczność i łatwość edycji poza systemem bazodanowym. Implementacja mechanizmu importu oparta została na technice batch insert z użyciem biblioteki psycopg w języku Python. Wybór metody <code class="docutils literal notranslate"><span class="pre">executemany()</span></code> zapewnia optymalny kompromis między uniwersalnością a wydajnością, pozwalając na szybkie wstawienie wielu rekordów w jednej transakcji z jednoczesnym zabezpieczeniem przedSQL Injection poprzez sparametryzowane zapytania.</p>
-<p>Automatyzacja procesu inicjalizacji systemu za pomocą skryptów Python stanowi znaczący wkład w praktyczność rozwiązania, umożliwiając łatwe replikowanie i testowanie bazy danych w różnych środowiskach. Zastosowanie Context Managerów zapewnia bezpieczne zarządzanie transakcjami i zasobami bazy danych.</p>
-<p>Niniejszy projekt stanowi kompletne studium cyklu życia relacyjnej bazy danych – od teoretycznego modelowania (Rozdziały 1-3) poprzez praktyczną implementację (Rozdział 4) – demonstrując profesjonalne podejście do administracji, projektowania i eksploatacji systemów bazodanowych.</p>
+<p>Niniejszy rozdział wieńczy etap projektowania i wdrażania struktury relacyjnej bazy danych dla systemu zarządzania biblioteką. Poprzez transformację modelu logicznego do postaci fizycznej osiągnięto kompletne i funkcjonalne rozwiązanie.</p>
+<p>Pierwsza część rozdziału koncentrowała się na <strong>Definicji fizycznej bazy danych (Zadanie 1)</strong>, gdzie dokonano implementacji schematów dla dwóch wiodących silników relacyjnych: PostgreSQL i SQLite, stanowiących praktyczną alternatywę w zależności od wymagań skalowalności oraz zasobów dostępnych w środowisku produkcyjnym.</p>
+<p>Druga część rozdziału poświęcona została <strong>Mechanizmowi zasilania bazy danych (Zadanie 2)</strong>. Dane demonstracyjne przygotowano w formacie CSV, który zapewnia elastyczność i łatwość edycji zarówno dla administratorów baz danych, jak i dla użytkowników końcowych systemu.</p>
+<p>Automatyzacja procesu inicjalizacji systemu za pomocą skryptów Python stanowi znaczący wkład w praktyczność rozwiązania, umożliwiając łatwe replikowanie i testowanie bazy danych w różnych środowiskach bez konieczności wykonywania repetycyjnych czynności manualnych.</p>
+<p>Niniejszy projekt stanowi kompletne studium cyklu życia relacyjnej bazy danych – od teoretycznego modelowania (Rozdziały 1-3) poprzez praktyczną implementację (Rozdział 4) – demonstrując całkowity proces od koncepcji do produkcyjnego systemu zarządzania danymi.</p>
 </section>
 </section>
 
