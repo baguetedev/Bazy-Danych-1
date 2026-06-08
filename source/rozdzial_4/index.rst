@@ -110,6 +110,13 @@ Poniżej przedstawiono fragment skryptu aplikacyjnego odpowiedzialnego za odczyt
 
 Podsumowanie
 ============
-Niniejszy rozdział wieńczy etap projektowania i wdrażania struktury relacyjnej bazy danych dla systemu zarządzania biblioteką. Poprzez transformację modelu logicznego do postaci fizycznej, [...]
 
-Dodatkowo, proces inicjalizacji systemu został zautomatyzowany dzięki przygotowaniu skryptu w języku Python. Wykorzystanie plików CSV oraz mechanizmu wsadowego wstawiania danych (batch insert[...]
+Niniejszy rozdział wieńczy etap projektowania i wdrażania struktury relacyjnej bazy danych dla systemu zarządzania biblioteką. Poprzez transformację modelu logicznego do postaci fizycznej oraz realizację mechanizmów zasilania, udało się stworzyć w pełni funkcjonalną infrastrukturę bazodanową obsługującą złożone procesy biblioteczne.
+
+Pierwsza część rozdziału koncentrowała się na **Definicji fizycznej bazy danych (Zadanie 1)**, gdzie dokonano implementacji schematów dla dwóch wiodących silników relacyjnych: PostgreSQL i SQLite. Dla środowiska PostgreSQL przygotowano zaawansowane skrypty DDL (Data Definition Language) wykorzystujące natywne typy danych i rygorystyczne więzy integralności, obejmujące tabele takie jak Ksiazki, Wypozyczenia, Autorzy, Kategorie i Czytelnicy. W przypadku SQLite, schemat został zoptymalizowany pod względem jego ograniczeń typowania, zachowując jednocześnie funkcjonalność systemu poprzez jawne deklaracje kluczy obcych.
+
+Druga część rozdziału poświęcona została **Mechanizmowi zasilania bazy danych (Zadanie 2)**. Dane demonstracyjne przygotowano w formacie CSV, który zapewnia elastyczność i łatwość edycji poza systemem bazodanowym. Implementacja mechanizmu importu oparta została na technice batch insert z użyciem biblioteki psycopg w języku Python. Wybór metody ``executemany()`` zapewnia optymalny kompromis między uniwersalnością a wydajnością, pozwalając na szybkie wstawienie wielu rekordów w jednej transakcji z jednoczesnym zabezpieczeniem przedSQL Injection poprzez sparametryzowane zapytania.
+
+Automatyzacja procesu inicjalizacji systemu za pomocą skryptów Python stanowi znaczący wkład w praktyczność rozwiązania, umożliwiając łatwe replikowanie i testowanie bazy danych w różnych środowiskach. Zastosowanie Context Managerów zapewnia bezpieczne zarządzanie transakcjami i zasobami bazy danych.
+
+Niniejszy projekt stanowi kompletne studium cyklu życia relacyjnej bazy danych – od teoretycznego modelowania (Rozdziały 1-3) poprzez praktyczną implementację (Rozdział 4) – demonstrując profesjonalne podejście do administracji, projektowania i eksploatacji systemów bazodanowych.
