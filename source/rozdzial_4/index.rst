@@ -8,11 +8,11 @@ Rozdział 4: Implementacja fizyczna i zasilanie bazy danych
 
 Definicja fizyczna bazy danych (Zadanie 1)
 ==========================================
-Na podstawie opracowanych wcześniej modeli logicznych przygotowano skrypty DDL (Data Definition Language) dla dwóch docelowych silników relacyjnych baz danych: PostgreSQL oraz SQLite. Kody te p[...]
+Na podstawie opracowanych wcześniej modeli logicznych przygotowano skrypty DDL (Data Definition Language) dla dwóch docelowych silników relacyjnych baz danych: PostgreSQL oraz SQLite. Kody te przygotowały solidną fundamentę dla skutecznego przechowywania i zarządzania danymi biblioteki.
 
 Skrypt dla środowiska PostgreSQL
 --------------------------------
-Środowisko PostgreSQL pozwala na wykorzystanie zaawansowanych, natywnych typów danych oraz rygorystyczne egzekwowanie więzów integralności. W poniższym skrypcie kluczowym elementem jest uży[...]
+Środowisko PostgreSQL pozwala na wykorzystanie zaawansowanych, natywnych typów danych oraz rygorystyczne egzekwowanie więzów integralności. W poniższym skrypcie kluczowym elementem jest użycie więzów klucza obcego (FOREIGN KEY) w celu zapewnienia spójności referencyalnej między tabelami.
 
 .. code-block:: sql
 
@@ -35,7 +35,7 @@ Skrypt dla środowiska PostgreSQL
 
 Skrypt dla środowiska SQLite
 ----------------------------
-W silniku SQLite struktura ulega pewnemu uproszczeniu z powodu mniejszej rygorystyczności typowania oraz bardzo ograniczonej liczby wbudowanych klas typów danych (np. brak odrębnego typu daty).[...]
+W silniku SQLite struktura ulega pewnemu uproszczeniu z powodu mniejszej rygorystyczności typowania oraz bardzo ograniczonej liczby wbudowanych klas typów danych (np. brak odrębnego typu daty). Pomimo ograniczeń, SQLite pozostaje niezawodnym rozwiązaniem do prototypowania i mniejszych aplikacji.
 
 .. code-block:: sql
 
@@ -56,7 +56,7 @@ Posiadając gotową strukturę bazy, należało wyposażyć ją w dane demonstra
 
 Formatyzacja danych (Pliki CSV)
 -------------------------------
-Dane do importu przygotowano w niezależnym formacie płaskim CSV (Comma-Separated Values). Takie podejście pozwala na łatwą edycję danych poza systemem bazodanowym. Poniżej zaprezentowano wy[...]
+Dane do importu przygotowano w niezależnym formacie płaskim CSV (Comma-Separated Values). Takie podejście pozwala na łatwą edycję danych poza systemem bazodanowym. Poniżej zaprezentowano wybrane kategorie książek przygotowane w formacie CSV.
 
 .. code-block:: text
 
@@ -69,9 +69,9 @@ Dane do importu przygotowano w niezależnym formacie płaskim CSV (Comma-Separat
 
 Implementacja mechanizmu importu
 --------------------------------
-Do zaimportowania powyższych danych wybrano mechanizm wprowadzania wielowartościowego oparty na technice **INSERT (multi-value/batch)**. Rozwiązanie zrealizowano z wykorzystaniem języka Python[...]
+Do zaimportowania powyższych danych wybrano mechanizm wprowadzania wielowartościowego oparty na technice **INSERT (multi-value/batch)**. Rozwiązanie zrealizowano z wykorzystaniem języka Python wraz z biblioteką psycopg do komunikacji z bazą PostgreSQL.
 
-Wybór tego mechanizmu podyktowany jest kompromisem między uniwersalnością a wydajnością. Użycie metody ``executemany()`` na obiekcie kursora bazy danych pozwala na szybkie wstawienie wielu [...]
+Wybór tego mechanizmu podyktowany jest kompromisem między uniwersalnością a wydajnością. Użycie metody ``executemany()`` na obiekcie kursora bazy danych pozwala na szybkie wstawienie wielu rekordów bez konieczności wykonywania zapytania dla każdego wiersza osobno.
 
 Poniżej przedstawiono fragment skryptu aplikacyjnego odpowiedzialnego za odczyt z pliku i zasilenie tabel:
 
@@ -93,7 +93,7 @@ Poniżej przedstawiono fragment skryptu aplikacyjnego odpowiedzialnego za odczyt
     # 2. Właściwy proces wsadowego importu do bazy PostgreSQL
     def importuj_do_postgres(kategorie_do_importu, db_config):
         try:
-            # Użycie Context Managera dla bezpiecznego zarządzania transakcjami
+            # U��ycie Context Managera dla bezpiecznego zarządzania transakcjami
             with psycopg.connect(**db_config) as conn:
                 with conn.cursor() as cursor:
 
@@ -111,12 +111,12 @@ Poniżej przedstawiono fragment skryptu aplikacyjnego odpowiedzialnego za odczyt
 Podsumowanie
 ============
 
-Niniejszy rozdział wieńczy etap projektowania i wdrażania struktury relacyjnej bazy danych dla systemu zarządzania biblioteką. Poprzez transformację modelu logicznego do postaci fizycznej oraz realizację mechanizmów zasilania, udało się stworzyć w pełni funkcjonalną infrastrukturę bazodanową obsługującą złożone procesy biblioteczne.
+Niniejszy rozdział wieńczy etap projektowania i wdrażania struktury relacyjnej bazy danych dla systemu zarządzania biblioteką. Poprzez transformację modelu logicznego do postaci fizycznej osiągnięto kompletne i funkcjonalne rozwiązanie.
 
-Pierwsza część rozdziału koncentrowała się na **Definicji fizycznej bazy danych (Zadanie 1)**, gdzie dokonano implementacji schematów dla dwóch wiodących silników relacyjnych: PostgreSQL i SQLite. Dla środowiska PostgreSQL przygotowano zaawansowane skrypty DDL (Data Definition Language) wykorzystujące natywne typy danych i rygorystyczne więzy integralności, obejmujące tabele takie jak Ksiazki, Wypozyczenia, Autorzy, Kategorie i Czytelnicy. W przypadku SQLite, schemat został zoptymalizowany pod względem jego ograniczeń typowania, zachowując jednocześnie funkcjonalność systemu poprzez jawne deklaracje kluczy obcych.
+Pierwsza część rozdziału koncentrowała się na **Definicji fizycznej bazy danych (Zadanie 1)**, gdzie dokonano implementacji schematów dla dwóch wiodących silników relacyjnych: PostgreSQL i SQLite, stanowiących praktyczną alternatywę w zależności od wymagań skalowalności oraz zasobów dostępnych w środowisku produkcyjnym.
 
-Druga część rozdziału poświęcona została **Mechanizmowi zasilania bazy danych (Zadanie 2)**. Dane demonstracyjne przygotowano w formacie CSV, który zapewnia elastyczność i łatwość edycji poza systemem bazodanowym. Implementacja mechanizmu importu oparta została na technice batch insert z użyciem biblioteki psycopg w języku Python. Wybór metody ``executemany()`` zapewnia optymalny kompromis między uniwersalnością a wydajnością, pozwalając na szybkie wstawienie wielu rekordów w jednej transakcji z jednoczesnym zabezpieczeniem przedSQL Injection poprzez sparametryzowane zapytania.
+Druga część rozdziału poświęcona została **Mechanizmowi zasilania bazy danych (Zadanie 2)**. Dane demonstracyjne przygotowano w formacie CSV, który zapewnia elastyczność i łatwość edycji zarówno dla administratorów baz danych, jak i dla użytkowników końcowych systemu.
 
-Automatyzacja procesu inicjalizacji systemu za pomocą skryptów Python stanowi znaczący wkład w praktyczność rozwiązania, umożliwiając łatwe replikowanie i testowanie bazy danych w różnych środowiskach. Zastosowanie Context Managerów zapewnia bezpieczne zarządzanie transakcjami i zasobami bazy danych.
+Automatyzacja procesu inicjalizacji systemu za pomocą skryptów Python stanowi znaczący wkład w praktyczność rozwiązania, umożliwiając łatwe replikowanie i testowanie bazy danych w różnych środowiskach bez konieczności wykonywania repetycyjnych czynności manualnych.
 
-Niniejszy projekt stanowi kompletne studium cyklu życia relacyjnej bazy danych – od teoretycznego modelowania (Rozdziały 1-3) poprzez praktyczną implementację (Rozdział 4) – demonstrując profesjonalne podejście do administracji, projektowania i eksploatacji systemów bazodanowych.
+Niniejszy projekt stanowi kompletne studium cyklu życia relacyjnej bazy danych – od teoretycznego modelowania (Rozdziały 1-3) poprzez praktyczną implementację (Rozdział 4) – demonstrując całkowity proces od koncepcji do produkcyjnego systemu zarządzania danymi.
