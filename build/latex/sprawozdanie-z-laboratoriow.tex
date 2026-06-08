@@ -2077,7 +2077,7 @@ Poniżej przedstawiono fragment skryptu aplikacyjnego odpowiedzialnego za odczyt
 \PYG{c+c1}{\PYGZsh{} 2. Właściwy proces wsadowego importu do bazy PostgreSQL}
 \PYG{k}{def} \PYG{n+nf}{importuj\PYGZus{}do\PYGZus{}postgres}\PYG{p}{(}\PYG{n}{kategorie\PYGZus{}do\PYGZus{}importu}\PYG{p}{,} \PYG{n}{db\PYGZus{}config}\PYG{p}{)}\PYG{p}{:}
     \PYG{k}{try}\PYG{p}{:}
-        \PYG{c+c1}{\PYGZsh{} U��ycie Context Managera dla bezpiecznego zarządzania transakcjami}
+        \PYG{c+c1}{\PYGZsh{} Użycie Context Managera dla bezpiecznego zarządzania transakcjami}
         \PYG{k}{with} \PYG{n}{psycopg}\PYG{o}{.}\PYG{n}{connect}\PYG{p}{(}\PYG{o}{*}\PYG{o}{*}\PYG{n}{db\PYGZus{}config}\PYG{p}{)} \PYG{k}{as} \PYG{n}{conn}\PYG{p}{:}
             \PYG{k}{with} \PYG{n}{conn}\PYG{o}{.}\PYG{n}{cursor}\PYG{p}{(}\PYG{p}{)} \PYG{k}{as} \PYG{n}{cursor}\PYG{p}{:}
 

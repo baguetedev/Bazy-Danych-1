@@ -119,7 +119,7 @@ Horror
 <span class="c1"># 2. Właściwy proces wsadowego importu do bazy PostgreSQL</span>
 <span class="k">def</span> <span class="nf">importuj_do_postgres</span><span class="p">(</span><span class="n">kategorie_do_importu</span><span class="p">,</span> <span class="n">db_config</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="c1"># U��ycie Context Managera dla bezpiecznego zarządzania transakcjami</span>
+        <span class="c1"># Użycie Context Managera dla bezpiecznego zarządzania transakcjami</span>
         <span class="k">with</span> <span class="n">psycopg</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="o">**</span><span class="n">db_config</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
             <span class="k">with</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
 
