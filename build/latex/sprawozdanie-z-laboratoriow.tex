@@ -115,7 +115,7 @@ Dokumentacja została podzielona na pięć głównych sekcji:
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Rozdział 1: Kontrola i konserwacja} \textendash{} Analiza fundamentalnych procesów administracyjnych niezbędnych do utrzymania wysokiej dostępności i wydajności systemu bazodanowego. Obejmuje VACUUM, REINDEX, kopie zapasowe i monitoring.
+\sphinxstylestrong{Rozdział 1: Wstęp oraz linki} \textendash{} Wstęp do sprawozdania oraz linki.
 
 \item {} 
 \sphinxAtStartPar
@@ -138,8 +138,8 @@ Dokumentacja została podzielona na pięć głównych sekcji:
 \sphinxstepscope
 
 
-\chapter{Rozdział 1: Kontrola i konserwacja}
-\label{\detokenize{rozdzial_1/index:rozdzial-1-kontrola-i-konserwacja}}\label{\detokenize{rozdzial_1/index::doc}}\begin{quote}\begin{description}
+\chapter{Rozdział 1: Wstęp oraz linki}
+\label{\detokenize{rozdzial_1/index:rozdzial-1-wstep-oraz-linki}}\label{\detokenize{rozdzial_1/index::doc}}\begin{quote}\begin{description}
 \sphinxlineitem{Autorzy}\begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
@@ -155,114 +155,127 @@ Paweł Łosowski
 \end{description}\end{quote}
 
 
-\section{Wprowadzenie}
-\label{\detokenize{rozdzial_1/index:wprowadzenie}}
+\section{Wstęp do sprawozdania}
+\label{\detokenize{rozdzial_1/index:wstep-do-sprawozdania}}
 \sphinxAtStartPar
-Współczesne systemy relacyjnych baz danych to wysoce skomplikowane środowiska, które wymagają ciągłego i proaktywnego nadzoru, aby zagwarantować wysoką dostępność, niezawodność oraz wydajność. Administracja takimi systemami stanowi złożone zagadnienie wymagające zarówno wiedzy teoretycznej, jak i praktycznego doświadczenia w zarządzaniu infrastrukturą informatyczną.
-
-
-\section{Zarządzanie przestrzenią i mechanizm współbieżności}
-\label{\detokenize{rozdzial_1/index:zarzadzanie-przestrzenia-i-mechanizm-wspolbieznosci}}
-\sphinxAtStartPar
-PostgreSQL opiera swoje działanie na zaawansowanej architekturze określanej jako Multi\sphinxhyphen{}Version Concurrency Control (MVCC). Technologia ta pozwala na równoległy odczyt i zapis danych bez wzajemnego blokowania się transakcji, co stanowi fundamentalną zaletę w środowiskach wieloużytkownikowych o wysokim natężeniu operacji.
+Niniejsze sprawozdanie dokumentuje przebieg prac laboratoryjnych z przedmiotu Bazy Danych. Celem projektu jest praktyczne zastosowanie wiedzy z zakresu projektowania, wdrażania oraz obsługi systemów relacyjnych baz danych.
 
 \sphinxAtStartPar
-Aby zapobiec zjawisku drastycznego puchnięcia tabel oraz degradacji wydajności operacji wejścia i wyjścia, konieczna jest regularna konserwacja na poziomie nośnika danych:
+Praca obejmuje pełen cykl życia bazy: od analizy teoretycznej, poprzez stworzenie modelu pojęciowego i logicznego, aż po fizyczną implementację w środowiskach PostgreSQL i SQLite, a także realizację procesów wsadowego zasilania danymi.
+
+
+\section{Wykaz repozytoriów (Linki)}
+\label{\detokenize{rozdzial_1/index:wykaz-repozytoriow-linki}}
+\sphinxAtStartPar
+Projekt został podzielony na odpowiednie repozytoria w systemie kontroli wersji Git, zapewniając porządek między dokumentacją a fizycznymi plikami środowiska bazodanowego.
+
+
+\subsection{1. Główne repozytorium sprawozdania (Dokumentacja Sphinx)}
+\label{\detokenize{rozdzial_1/index:glowne-repozytorium-sprawozdania-dokumentacja-sphinx}}
+\sphinxAtStartPar
+Tutaj znajduje się struktura całej dokumentacji tekstowej, konfiguracja kompilatora Sphinx oraz historia zmian.
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{VACUUM:} Podstawowy proces konserwacyjny odzyskujący miejsce po martwych krotkach. Oznacza on wolne obszary jako dostępne do ponownego zapisu przez nowe instrukcje, zapobiegając niekontrolowanemu wzrostowi rozmiarów tabel na dysku.
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{VACUUM FULL:} Znacznie bardziej inwazyjna wersja operacji, która fizycznie przebudowuje strukturę całej tabeli i trwale zwraca wolne miejsce do systemu operacyjnego. Operacja ta wymaga jednak zablokowania całej tabeli i powinna być wykonywana w godzinach niskiego obciążenia.
-
-\item {} 
-\sphinxAtStartPar
-\sphinxstylestrong{AUTOVACUUM:} W nowoczesnych środowiskach produkcyjnych utrzymanie czystości dyskowej powierza się wbudowanemu procesowi pracującemu w tle. Monitoruje on na bieżąco statystyki zmian i automatycznie wyzwala operacje czyszczenia, eliminując potrzebę ręcznej interwencji administratora.
+\sphinxstylestrong{Link:} \sphinxhref{https://github.com/baguetedev/Bazy-Danych-1}{baguetedev/Bazy\sphinxhyphen{}Danych\sphinxhyphen{}1}%
+\begin{footnote}[1]\sphinxAtStartFootnote
+\sphinxnolinkurl{https://github.com/baguetedev/Bazy-Danych-1}
+%
+\end{footnote}
 
 \end{itemize}
 
+
+\subsection{2. Repozytorium z plikami projektowymi}
+\label{\detokenize{rozdzial_1/index:repozytorium-z-plikami-projektowymi}}
 \sphinxAtStartPar
-Zaniedbanie procesu czyszczenia w systemach o wysokiej rotacji danych może doprowadzić nie tylko do spadku wydajności, ale w skrajnych przypadkach do wyczerpania identyfikatorów transakcji, co prowadzi do całkowitego zamrożenia bazy.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Przykładowe wymuszenie manualnej konserwacji z analizą statystyk dla tabeli}
-\PYG{k}{VACUUM}\PYG{+w}{ }\PYG{p}{(}\PYG{k}{VERBOSE}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{ANALYZE}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{Wypozyczenia}\PYG{p}{;}
-\end{sphinxVerbatim}
-
-
-\section{Optymalizacja i statystyki planisty zapytań}
-\label{\detokenize{rozdzial_1/index:optymalizacja-i-statystyki-planisty-zapytan}}
-\sphinxAtStartPar
-Kolejnym filarem utrzymania sprawności systemu jest kontrola nad optymalizatorem, zwanym planistą zapytań. Silnik bazy danych przed wykonaniem jakiejkolwiek skomplikowanej kwerendy analizuje dostępne drogi realizacji i wybiera najefektywniejszą z punktu widzenia kosztów obliczeniowych.
-
-\sphinxAtStartPar
-Aby planista mógł podejmować optymalne decyzje, musi opierać się na wysoce dokładnych i aktualnych statystykach dotyczących rozkładu danych. Obejmują one między innymi histogramy wartości w kolumnach, liczby odrębnych wartości (distinct count), oraz rozmiary tabel i indeksów.
+W tym repozytorium umieszczono kody źródłowe, skrypty DDL dla silników PostgreSQL i SQLite, wygenerowany plik bazy oraz pliki CSV wykorzystywane do zasilania bazy danych.
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-Instrukcja \sphinxstylestrong{ANALYZE} służy do natychmiastowego odświeżenia tych metadanych. Baza pobiera losową próbkę wierszy i na jej podstawie aktualizuje wewnętrzne tabele systemowe, co pozwala uniknąć błędnych oszacowań planu wykonania.
+\sphinxstylestrong{Link WWW:} \sphinxhref{https://github.com/baguetedev/Bazy-Danych-pliki}{baguetedev/Bazy\sphinxhyphen{}Danych\sphinxhyphen{}pliki}%
+\begin{footnote}[2]\sphinxAtStartFootnote
+\sphinxnolinkurl{https://github.com/baguetedev/Bazy-Danych-pliki}
+%
+\end{footnote}
 
 \item {} 
 \sphinxAtStartPar
-Bieżące profilowanie wydajności realizowane jest natomiast przy pomocy instrukcji \sphinxstylestrong{EXPLAIN ANALYZE}. Narzędzie to uruchamia zapytanie, po czym zwraca nie tylko wynik, ale również szczegółowy opis planu wykonania wraz z rzeczywistymi czasy i liczbami wierszy na każdym kroku.
+\sphinxstylestrong{Klonowanie SSH:} \sphinxcode{\sphinxupquote{git@github.com:baguetedev/Bazy\sphinxhyphen{}Danych\sphinxhyphen{}pliki.git}}
 
 \end{itemize}
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Kontrola planu wykonania zapytania z rzeczywistym pomiarem czasu}
-\PYG{k}{EXPLAIN}\PYG{+w}{ }\PYG{k}{ANALYZE}
-\PYG{k}{SELECT}\PYG{+w}{ }\PYG{k}{c}\PYG{p}{.}\PYG{n}{Imie}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{c}\PYG{p}{.}\PYG{n}{Nazwisko}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{k}\PYG{p}{.}\PYG{n}{Tytul}
-\PYG{k}{FROM}\PYG{+w}{ }\PYG{n}{Czytelnicy}\PYG{+w}{ }\PYG{k}{c}
-\PYG{k}{JOIN}\PYG{+w}{ }\PYG{n}{Wypozyczenia}\PYG{+w}{ }\PYG{n}{w}\PYG{+w}{ }\PYG{k}{ON}\PYG{+w}{ }\PYG{k}{c}\PYG{p}{.}\PYG{n}{ID\PYGZus{}Czytelnika}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{w}\PYG{p}{.}\PYG{n}{ID\PYGZus{}Czytelnika}
-\PYG{k}{JOIN}\PYG{+w}{ }\PYG{n}{Ksiazki}\PYG{+w}{ }\PYG{n}{k}\PYG{+w}{ }\PYG{k}{ON}\PYG{+w}{ }\PYG{n}{w}\PYG{p}{.}\PYG{n}{ID\PYGZus{}Ksiazki}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{k}\PYG{p}{.}\PYG{n}{ID\PYGZus{}Ksiazki}
-\PYG{k}{WHERE}\PYG{+w}{ }\PYG{n}{w}\PYG{p}{.}\PYG{n}{Data\PYGZus{}Zwrotu}\PYG{+w}{ }\PYG{k}{IS}\PYG{+w}{ }\PYG{k}{NULL}\PYG{p}{;}
-\end{sphinxVerbatim}
 
-
-\section{Bezpieczeństwo i rygorystyczna kontrola dostępu}
-\label{\detokenize{rozdzial_1/index:bezpieczenstwo-i-rygorystyczna-kontrola-dostepu}}
+\subsection{3. Repozytoria reszty grupy}
+\label{\detokenize{rozdzial_1/index:repozytoria-reszty-grupy}}
 \sphinxAtStartPar
-Bezpieczeństwo danych stanowi absolutny priorytet każdej administracji systemami informatycznymi. Nowoczesne podejście do ochrony baz danych całkowicie odchodzi od wykorzystywania globalnych kont administratora na rzecz zaawansowanego systemu uprawnień opartego na rolach (RBAC \textendash{} Role\sphinxhyphen{}Based Access Control).
-
+Poniżej znajdują się odnośniki do repozytoriów reszty grupy, które zostały zintegrowane z niniejszym sprawozdaniem w postaci submodułów w Rozdziale 2:
+\begin{itemize}
+\item {} 
 \sphinxAtStartPar
-System zabezpieczeń środowiska PostgreSQL pozwala na niezwykle elastyczną gradację uprawnień. Definiuje się dedykowane role systemowe przypisane do konkretnych mikrousług lub modułów aplikacji, z precyzyjnie określonymi prawami dostępu do pojedynczych schematów, tabel, a nawet kolumn.
+\sphinxstylestrong{Grupa 1 (rozdzial\_1):} \sphinxhref{https://github.com/karaskamil/Sprzet-dla-bazy-danych.git}{Link do repozytorium 1}%
+\begin{footnote}[3]\sphinxAtStartFootnote
+\sphinxnolinkurl{https://github.com/karaskamil/Sprzet-dla-bazy-danych.git}
+%
+\end{footnote}
 
+\item {} 
 \sphinxAtStartPar
-Kluczowym konceptem jest wdrożenie zasady najmniejszych uprawnień (Principle of Least Privilege). Rola wykorzystywana przez aplikację powinna dysponować prawami pozwalającymi wyłącznie na modyfikację danych niezbędnych do jej funkcjonowania, bez dostępu do danych wrażliwych czy możliwości zmiany struktury bazy.
+\sphinxstylestrong{Grupa 2 (rozdzial\_2):} \sphinxhref{https://github.com/Youarecheck/Bazy\_Danych\_Tematyczne\_Repo\_MK.git}{Link do repozytorium 2}%
+\begin{footnote}[4]\sphinxAtStartFootnote
+\sphinxnolinkurl{https://github.com/Youarecheck/Bazy\_Danych\_Tematyczne\_Repo\_MK.git}
+%
+\end{footnote}
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Przykład implementacji bezpiecznej polityki kontroli dostępu}
-\PYG{k}{CREATE}\PYG{+w}{ }\PYG{k}{ROLE}\PYG{+w}{ }\PYG{n}{app\PYGZus{}user}\PYG{+w}{ }\PYG{k}{WITH}\PYG{+w}{ }\PYG{n}{LOGIN}\PYG{+w}{ }\PYG{n}{PASSWORD}\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}TrudneHaslo123\PYGZsq{}}\PYG{p}{;}
-\PYG{k}{GRANT}\PYG{+w}{ }\PYG{k}{CONNECT}\PYG{+w}{ }\PYG{k}{ON}\PYG{+w}{ }\PYG{k}{DATABASE}\PYG{+w}{ }\PYG{n}{biblioteka\PYGZus{}db}\PYG{+w}{ }\PYG{k}{TO}\PYG{+w}{ }\PYG{n}{app\PYGZus{}user}\PYG{p}{;}
-\PYG{k}{GRANT}\PYG{+w}{ }\PYG{k}{USAGE}\PYG{+w}{ }\PYG{k}{ON}\PYG{+w}{ }\PYG{k}{SCHEMA}\PYG{+w}{ }\PYG{k}{public}\PYG{+w}{ }\PYG{k}{TO}\PYG{+w}{ }\PYG{n}{app\PYGZus{}user}\PYG{p}{;}
-\PYG{k}{GRANT}\PYG{+w}{ }\PYG{k}{SELECT}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{INSERT}\PYG{+w}{ }\PYG{k}{ON}\PYG{+w}{ }\PYG{n}{Wypozyczenia}\PYG{+w}{ }\PYG{k}{TO}\PYG{+w}{ }\PYG{n}{app\PYGZus{}user}\PYG{p}{;}
-\end{sphinxVerbatim}
-
-
-\section{Strategie zabezpieczania przed utratą danych}
-\label{\detokenize{rozdzial_1/index:strategie-zabezpieczania-przed-utrata-danych}}
+\item {} 
 \sphinxAtStartPar
-Nawet najlepiej zoptymalizowany i zabezpieczony system informatyczny jest narażony na błędy ludzkie lub awarie infrastruktury sprzętowej. Dlatego odpowiednia polityka wykonywania kopii zapasowych stanowi ostateczną linię obrony i jest absolutnie niezbędna dla każdej produkcyjnej instancji bazy danych.
+\sphinxstylestrong{Grupa 3 (rozdzial\_3):} \sphinxhref{https://github.com/pawlos1337/Bazy-danych-temat.git}{Link do repozytorium 3}%
+\begin{footnote}[5]\sphinxAtStartFootnote
+\sphinxnolinkurl{https://github.com/pawlos1337/Bazy-danych-temat.git}
+%
+\end{footnote}
 
+\item {} 
 \sphinxAtStartPar
-Kopie logiczne polegają na ekstrakcji danych z bazy do postaci czystego skryptu języka SQL lub dedykowanego formatu archiwalnego. Narzędzia realizujące to zadanie gwarantują przenośność danych między platformami i wersjami silnika, jednak proces przywracania jest czasochłonny i może nie przywrócić wszystkich zmian z ostatnich minut przed awarią.
+\sphinxstylestrong{Grupa 4 (rozdzial\_4):} \sphinxhref{https://github.com/OskarProgrammer/monitorowanie\_i\_diagnostyka.git}{Link do repozytorium 4}%
+\begin{footnote}[6]\sphinxAtStartFootnote
+\sphinxnolinkurl{https://github.com/OskarProgrammer/monitorowanie\_i\_diagnostyka.git}
+%
+\end{footnote}
 
+\item {} 
 \sphinxAtStartPar
-Dlatego w krytycznych środowiskach produkcyjnych stosuje się kopie fizyczne połączone z archiwizacją dzienników wyprzedzających. Dzienniki te rejestrują absolutnie każdą zmianę bajtu na poziomie magazynu, co umożliwia odtworzenie bazy do dowolnego punktu w przeszłości z dokładnością do sekundy.
+\sphinxstylestrong{Grupa 5 (rozdzial\_5):} \sphinxhref{https://github.com/KMachoK/Tematyczne.git}{Link do repozytorium 5}%
+\begin{footnote}[7]\sphinxAtStartFootnote
+\sphinxnolinkurl{https://github.com/KMachoK/Tematyczne.git}
+%
+\end{footnote}
 
-
-\section{Podsumowanie}
-\label{\detokenize{rozdzial_1/index:podsumowanie}}
+\item {} 
 \sphinxAtStartPar
-Prawidłowa kontrola i konserwacja środowiska bazodanowego to wielowymiarowy proces, który nie ma punktu końcowego, lecz trwa przez cały cykl życia oprogramowania. Złożoność nowoczesnych systemów relacyjnych wymaga holistycznego podejścia łączącego automatyzację, monitoring i ciągłe doskonalenie.
+\sphinxstylestrong{Grupa 6 (rozdzial\_6):} \sphinxhref{https://github.com/domino0472/Partycjonowani-Danych}{Link do repozytorium 6}%
+\begin{footnote}[8]\sphinxAtStartFootnote
+\sphinxnolinkurl{https://github.com/domino0472/Partycjonowani-Danych}
+%
+\end{footnote}
 
+\item {} 
 \sphinxAtStartPar
-Samo zaprojektowanie zgodnego ze sztuką schematu relacyjnego jest zaledwie początkiem pracy. Stabilność aplikacji zależy w równej mierze od rygorystycznego zarządzania fizyczną strukturą danych, optymalizacji wykonywanych operacji oraz wdrażania wielowarstwowych strategii bezpieczeństwa i ochrony przed awarią.
+\sphinxstylestrong{Grupa 7 (rozdzial\_7):} \sphinxhref{https://github.com/oski486/BazyDanych-Subject.git}{Link do repozytorium 7}%
+\begin{footnote}[9]\sphinxAtStartFootnote
+\sphinxnolinkurl{https://github.com/oski486/BazyDanych-Subject.git}
+%
+\end{footnote}
 
+\item {} 
 \sphinxAtStartPar
-Holistyczne spojrzenie na administrację PostgreSQL, obejmujące zarówno automatyzację procesów porządkujących pamięć, jak i ciągłe monitorowanie planów wykonania zapytań, pozwala na budowanie systemów, które są nie tylko funkcjonalne, ale także odpornie i niezawodne w najbardziej wymagających warunkach produkcyjnych.
+\sphinxstylestrong{Grupa 8 (rozdzial\_8):} \sphinxhref{https://github.com/Koko9077/Kopie-zapasowe-i-odzyskiwanie-danych.git}{Link do repozytorium 8}%
+\begin{footnote}[10]\sphinxAtStartFootnote
+\sphinxnolinkurl{https://github.com/Koko9077/Kopie-zapasowe-i-odzyskiwanie-danych.git}
+%
+\end{footnote}
+
+\end{itemize}
 
 \sphinxstepscope
 
