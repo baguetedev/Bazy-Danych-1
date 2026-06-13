@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.3.1)  13 JUN 2026 23:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.3.1)  13 JUN 2026 23:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1005,12 +1005,12 @@ L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `sprawozdanie-z-laboratoriow.out' has not cha
 nged.
-(rerunfilecheck)             Checksum: 179F47986A684FB25A15630CE4824F4E;19096.
+(rerunfilecheck)             Checksum: DB3A55C839A6AC0E0527C5C9798648ED;19165.
  ) 
 Here is how much of TeX's memory you used:
  20621 strings out of 473197
- 371649 string characters out of 5718606
- 804197 words of memory out of 5000000
+ 371660 string characters out of 5718606
+ 804223 words of memory out of 5000000
  43294 multiletter control sequences out of 15000+600000
  617575 words of font info for 95 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
@@ -1025,7 +1025,7 @@ fonts/type1/public/tex-gyre/qtmri.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/t
 xfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xt
 t.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/tcxtt.pfb>
-Output written on sprawozdanie-z-laboratoriow.pdf (26 pages, 2503003 bytes).
+Output written on sprawozdanie-z-laboratoriow.pdf (26 pages, 2503152 bytes).
 PDF statistics:
  660 PDF objects out of 1000 (max. 8388607)
  598 compressed objects within 6 object streams
