@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.3.1)  13 JUN 2026 20:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.3.1)  13 JUN 2026 20:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -965,7 +965,7 @@ Chapter 3.
 [18
 
 ]
-<model_konceptualny_biblioteka.png, id=569, 1891.065pt x 1276.77pt>
+<model_konceptualny_biblioteka.png, id=564, 1891.065pt x 1276.77pt>
 File: model_konceptualny_biblioteka.png Graphic file (type png)
 <use model_konceptualny_biblioteka.png>
 Package pdftex.def Info: model_konceptualny_biblioteka.png  used on input line 
@@ -974,7 +974,7 @@ Package pdftex.def Info: model_konceptualny_biblioteka.png  used on input line
 
 
 [19]
-<erd_logiczny_biblioteka.png, id=575, 712.91344pt x 181.42781pt>
+<erd_logiczny_biblioteka.png, id=570, 712.91344pt x 181.42781pt>
 File: erd_logiczny_biblioteka.png Graphic file (type png)
 <use erd_logiczny_biblioteka.png>
 Package pdftex.def Info: erd_logiczny_biblioteka.png  used on input line 1777.
@@ -982,13 +982,13 @@ Package pdftex.def Info: erd_logiczny_biblioteka.png  used on input line 1777.
 
 
 [20 <./model_konceptualny_biblioteka.png>]
-<fizyczny_sqlite_biblioteka.png, id=581, 828.84656pt x 181.42781pt>
+<fizyczny_sqlite_biblioteka.png, id=576, 828.84656pt x 181.42781pt>
 File: fizyczny_sqlite_biblioteka.png Graphic file (type png)
 <use fizyczny_sqlite_biblioteka.png>
 Package pdftex.def Info: fizyczny_sqlite_biblioteka.png  used on input line 181
 3.
 (pdftex.def)             Requested size: 397.06577pt x 86.91272pt.
-<fizyczny_postgres_biblioteka.drawio.png, id=582, 889.07156pt x 181.42781pt>
+<fizyczny_postgres_biblioteka.drawio.png, id=577, 889.07156pt x 181.42781pt>
 File: fizyczny_postgres_biblioteka.drawio.png Graphic file (type png)
 <use fizyczny_postgres_biblioteka.drawio.png>
 Package pdftex.def Info: fizyczny_postgres_biblioteka.drawio.png  used on input
@@ -1021,60 +1021,22 @@ nt\T1/qtm/m/n/10.95 ) ^^U Min-i-malna liczba wypo»y-cze« up-raw-ni-a-j¡ca do
 
 ]
 
-[26] (./sprawozdanie-z-laboratoriow.ind
+[26]
 
-[27]
-Underfull \hbox (badness 10000) in paragraph at lines 15--17
-[]\T1/txtt/m/n/10.95 get_czytelnicy_bez_wypozyczen() \T1/qtm/m/n/10.95 (\T1/qtm
-/m/it/10.95 in mod-ule
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 17--18
-[]\T1/txtt/m/n/10.95 get_katalog_osob() \T1/qtm/m/n/10.95 (\T1/qtm/m/it/10.95 i
-n mod-ule bib-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 24--26
-[]\T1/txtt/m/n/10.95 get_puste_kategorie() \T1/qtm/m/n/10.95 (\T1/qtm/m/it/10.9
-5 in mod-ule bib-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 26--27
-[]\T1/txtt/m/n/10.95 get_raport_autorow() \T1/qtm/m/n/10.95 (\T1/qtm/m/it/10.95
- in mod-ule bib-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 27--29
-[]\T1/txtt/m/n/10.95 get_srednia_wypozyczen_na_czytelnika() \T1/qtm/m/n/10.95 (
-\T1/qtm/m/it/10.95 in
- []
-
-
-
-
-
-[28
-
-
-
-]) (./sprawozdanie-z-laboratoriow.aux)
+[27] (./sprawozdanie-z-laboratoriow.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `sprawozdanie-z-laboratoriow.out' has not cha
 nged.
-(rerunfilecheck)             Checksum: 10E076EA60C4AFCB608667536CE8810D;18876.
+(rerunfilecheck)             Checksum: 5CCB7FDF8BC58666F6D5DA061CCFC314;18805.
  ) 
 Here is how much of TeX's memory you used:
- 20639 strings out of 473197
- 371880 string characters out of 5718606
- 800033 words of memory out of 5000000
- 43299 multiletter control sequences out of 15000+600000
+ 20624 strings out of 473197
+ 371514 string characters out of 5718606
+ 799038 words of memory out of 5000000
+ 43289 multiletter control sequences out of 15000+600000
  617575 words of font info for 95 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
  72i,12n,82p,1216b,674s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1088,10 +1050,10 @@ fonts/type1/public/tex-gyre/qtmri.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/t
 xfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xt
 t.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/tcxtt.pfb>
-Output written on sprawozdanie-z-laboratoriow.pdf (31 pages, 2514568 bytes).
+Output written on sprawozdanie-z-laboratoriow.pdf (30 pages, 2512627 bytes).
 PDF statistics:
- 731 PDF objects out of 1000 (max. 8388607)
- 663 compressed objects within 7 object streams
- 169 named destinations out of 1000 (max. 500000)
- 753 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 708 PDF objects out of 1000 (max. 8388607)
+ 641 compressed objects within 7 object streams
+ 167 named destinations out of 1000 (max. 500000)
+ 745 words of extra memory for PDF output out of 10000 (max. 10000000)
 

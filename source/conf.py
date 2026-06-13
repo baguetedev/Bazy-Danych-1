@@ -29,7 +29,8 @@ latex_elements = {
     'papersize': 'a4paper',
     'pointsize': '11pt',
     'fncychap': '\\usepackage[Bjarne]{fncychap}',
-    'extraclassoptions': 'openany,oneside',  # KLUCZOWE: wyłącza openright i twoside
+    'extraclassoptions': 'openany,oneside',
+    'printindex': '',  # <--- TA LINIJKA CAŁKOWICIE USUWA TEN ALFABETYCZNY INDEKS Z PDF
     'preamble': r'''
 \usepackage{babel}
 \usepackage{graphicx}
@@ -46,7 +47,6 @@ latex_elements = {
 ''',
     'sphinxsetup': 'hmargin={0.7in,0.7in}, vmargin={0.7in,0.7in}, verbatimwithframe=false',
 }
-
 latex_documents = [
     ('index', 'sprawozdanie-z-laboratoriow.tex', 'Sprawozdanie z Laboratorium: Bazy Danych', 
      'Paweł Łoćwin', 'manual'),

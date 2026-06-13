@@ -87,4 +87,3 @@
 \contentsline {section}{\numberline {5.1}Wstęp}{25}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Pełna specyfikacja stworzonego API}{25}{section.5.2}%
 \contentsline {subsection}{\numberline {5.2.1}Moduł biblioteka\_zapytania}{25}{subsection.5.2.1}%
-\contentsline {chapter}{Index}{28}{section*.37}%
