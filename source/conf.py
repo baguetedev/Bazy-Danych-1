@@ -30,13 +30,16 @@ latex_elements = {
     'pointsize': '11pt',
     'fncychap': '\\usepackage[Bjarne]{fncychap}',
     'extraclassoptions': 'openany,oneside',
-    'printindex': '',  # <--- TA LINIJKA CAŁKOWICIE USUWA TEN ALFABETYCZNY INDEKS Z PDF
+    'printindex': '',
     'preamble': r'''
 \usepackage{babel}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \setcounter{tocdepth}{2}
 \raggedbottom
+
+% TWARDY RESET INDEKSU - zmusza LaTeXa do zignorowania komendy generującej spis
+\renewcommand{\printindex}{}
 
 % Zmniejszenie przestrzeni przed nagłówkami
 \setlength{\parskip}{0pt plus 1pt}
