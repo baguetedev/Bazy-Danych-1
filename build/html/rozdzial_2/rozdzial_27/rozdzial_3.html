@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2.7.3. 3. Zarządzanie tożsamością, uwierzytelnianie i autoryzacja &#8212; Sprawozdanie-z-laboratoriów  documentation</title>
+    <title>3. Zarządzanie tożsamością, uwierzytelnianie i autoryzacja &#8212; Sprawozdanie-z-laboratoriów  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
@@ -13,8 +13,8 @@
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="2.7.4. 4. Kryptografia w bazach danych" href="rozdzial_4.html" />
-    <link rel="prev" title="2.7.2. 2. Ataki na bazy danych i luki w zabezpieczeniach" href="rozdzial_2.html" />
+    <link rel="next" title="4. Kryptografia w bazach danych" href="rozdzial_4.html" />
+    <link rel="prev" title="2. Ataki na bazy danych i luki w zabezpieczeniach" href="rozdzial_2.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -33,10 +33,10 @@
           <div class="body" role="main">
             
   <section id="zarzadzanie-tozsamoscia-uwierzytelnianie-i-autoryzacja">
-<h1><span class="section-number">2.7.3. </span>3. Zarządzanie tożsamością, uwierzytelnianie i autoryzacja<a class="headerlink" href="#zarzadzanie-tozsamoscia-uwierzytelnianie-i-autoryzacja" title="Link to this heading">¶</a></h1>
+<h1>3. Zarządzanie tożsamością, uwierzytelnianie i autoryzacja<a class="headerlink" href="#zarzadzanie-tozsamoscia-uwierzytelnianie-i-autoryzacja" title="Link to this heading">¶</a></h1>
 <p>Po zabezpieczeniu infrastruktury sieciowej oraz aplikacji przed atakami typu Injection, kolejną linią obrony jest ścisła kontrola dostępu do samych danych. W architekturze systemów bazodanowych proces ten opiera się na trzech filarach: zarządzaniu tożsamością (Identity Management), uwierzytelnianiu (Authentication) oraz autoryzacji (Authorization). Prawidłowa implementacja tych mechanizmów gwarantuje, że zasada najmniejszego uprzywilejowania (PoLP - Principle of Least Privilege) może być skutecznie egzekwowana w całym systemie.</p>
 <section id="uwierzytelnianie-w-bazach-danych">
-<h2><span class="section-number">2.7.3.1. </span>Uwierzytelnianie w bazach danych<a class="headerlink" href="#uwierzytelnianie-w-bazach-danych" title="Link to this heading">¶</a></h2>
+<h2>Uwierzytelnianie w bazach danych<a class="headerlink" href="#uwierzytelnianie-w-bazach-danych" title="Link to this heading">¶</a></h2>
 <p>Proces uwierzytelniania weryfikuje, czy podmiot (użytkownik końcowy, administrator lub usługa aplikacyjna) łączący się z bazą danych jest tym, za kogo się podaje. Współczesne silniki relacyjne (np. PostgreSQL, Oracle) oraz nierelacyjne odeszły od prostego przesyłania haseł tekstem jawnym (plaintext), wprowadzając bardziej zaawansowane mechanizmy:</p>
 <ul class="simple">
 <li><p><strong>Kryptograficzne protokoły uwierzytelniania:</strong> Zamiast przestarzałych algorytmów (np. MD5), nowoczesne wdrożenia wykorzystują mechanizmy typu SCRAM-SHA-256 (Salted Challenge Response Authentication Mechanism). SCRAM zapobiega atakom typu <em>replay attack</em> oraz minimalizuje skutki ewentualnej kradzieży skrótów z serwera, ponieważ hasło nigdy nie jest przesyłane w otwartej formie.</p></li>
@@ -45,7 +45,7 @@
 </ul>
 </section>
 <section id="autoryzacja-i-modele-kontroli-dostepu">
-<h2><span class="section-number">2.7.3.2. </span>Autoryzacja i modele kontroli dostępu<a class="headerlink" href="#autoryzacja-i-modele-kontroli-dostepu" title="Link to this heading">¶</a></h2>
+<h2>Autoryzacja i modele kontroli dostępu<a class="headerlink" href="#autoryzacja-i-modele-kontroli-dostepu" title="Link to this heading">¶</a></h2>
 <p>Po udanym uwierzytelnieniu następuje faza autoryzacji, czyli weryfikacji, jakie operacje (SELECT, INSERT, UPDATE, DELETE) i na jakich obiektach (tabele, widoki, procedury) dany podmiot może wykonać.</p>
 <p><strong>Kontrola dostępu oparta na rolach (RBAC - Role-Based Access Control)</strong></p>
 <p>Model RBAC to absolutny standard w systemach zarządzania bazami danych. Zamiast nadawać uprawnienia (GRANT) bezpośrednio pojedynczym użytkownikom, tworzy się logiczne role odzwierciedlające funkcje biznesowe lub techniczne (np. <code class="docutils literal notranslate"><span class="pre">app_readonly</span></code>, <code class="docutils literal notranslate"><span class="pre">app_writer</span></code>, <code class="docutils literal notranslate"><span class="pre">dba_admin</span></code>). Następnie konta personalne lub serwisowe przypisuje się do tych ról. Taka abstrakcja drastycznie upraszcza audyt i zarządzanie uprawnieniami.</p>
@@ -62,7 +62,7 @@
 </div>
 </section>
 <section id="bezpieczenstwo-na-poziomie-wierszy-row-level-security">
-<h2><span class="section-number">2.7.3.3. </span>Bezpieczeństwo na poziomie wierszy (Row-Level Security)<a class="headerlink" href="#bezpieczenstwo-na-poziomie-wierszy-row-level-security" title="Link to this heading">¶</a></h2>
+<h2>Bezpieczeństwo na poziomie wierszy (Row-Level Security)<a class="headerlink" href="#bezpieczenstwo-na-poziomie-wierszy-row-level-security" title="Link to this heading">¶</a></h2>
 <p>Tradycyjny model autoryzacji w bazach danych działa na poziomie całych struktur (np. blokuje lub zezwala na odczyt całej tabeli). Współczesne aplikacje, zwłaszcza budowane w modelu wielodostępnym (multi-tenant), często wymagają znacznie bardziej granularnej kontroli, aby użytkownik jednego klienta nie miał fizycznej możliwości odczytania rekordów należących do innego.</p>
 <p>Z pomocą przychodzi mechanizm Row-Level Security (RLS). Pozwala on na nakładanie polityk bezpieczeństwa bezpośrednio na wiersze danych. Silnik bazy automatycznie i w sposób przezroczysty dokleja zdefiniowane warunki do każdego zapytania. Kluczową zaletą RLS jest fakt, że uniemożliwia on ominięcie logiki izolacyjnej w warstwie aplikacji – nawet w przypadku wystąpienia luki SQL Injection.</p>
 <p>Przykład definicji RLS (dialekt PostgreSQL):</p>
@@ -76,7 +76,7 @@
 </div>
 </section>
 <section id="zarzadzanie-poswiadczeniami-aplikacji-secrets-management">
-<h2><span class="section-number">2.7.3.4. </span>Zarządzanie poświadczeniami aplikacji (Secrets Management)<a class="headerlink" href="#zarzadzanie-poswiadczeniami-aplikacji-secrets-management" title="Link to this heading">¶</a></h2>
+<h2>Zarządzanie poświadczeniami aplikacji (Secrets Management)<a class="headerlink" href="#zarzadzanie-poswiadczeniami-aplikacji-secrets-management" title="Link to this heading">¶</a></h2>
 <p>Nawet najbardziej rygorystyczne mechanizmy wewnątrz samej bazy danych zawiodą, jeśli poświadczenia do niej (tzw. <em>connection strings</em>) zostaną umieszczone na stałe (hardcoded) w kodzie źródłowym i wypchnięte do repozytorium kodu.</p>
 <p>Zgodnie z dobrymi praktykami nurtu DevSecOps, środowiska produkcyjne powinny wykorzystywać zewnętrzne systemy zarządzania sekretami (np. HashiCorp Vault, AWS Secrets Manager). Narzędzia te pozwalają na dynamiczne generowanie tymczasowych, krótkożyjących poświadczeń (tzw. <em>dynamic secrets</em>). W takim scenariuszu aplikacja uwierzytelnia się do Vaulta i otrzymuje login oraz hasło do bazy danych, które wygasają np. po godzinie. Po tym czasie usługa zarządzająca automatycznie usuwa (REVOKE) te poświadczenia z silnika bazy, co radykalnie zmniejsza okno potencjalnego ataku w przypadku ich wycieku.</p>
 </section>
@@ -100,21 +100,21 @@
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_1/index.html">1. Wstęp oraz linki</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">2. Badania literaturowe</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_3/index.html">3. Rozdział 3: Projektowanie Bazy Danych: System Zarządzania Biblioteką</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_4/index.html">4. Rozdział 4: Implementacja fizyczna i zasilanie bazy danych</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_5/index.html">5. Rozdział 5: Komunikacja i operacje na danych</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_1/index.html">Wstęp oraz linki</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Badania literaturowe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_3/index.html">Rozdział 3: Projektowanie Bazy Danych: System Zarządzania Biblioteką</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_4/index.html">Rozdział 4: Implementacja fizyczna i zasilanie bazy danych</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_5/index.html">Rozdział 5: Komunikacja i operacje na danych</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="../index.html"><span class="section-number">2. </span>Badania literaturowe</a><ul>
-  <li><a href="index.html"><span class="section-number">2.7. </span>Bezpieczeństwo Baz Danych</a><ul>
-      <li>Previous: <a href="rozdzial_2.html" title="previous chapter"><span class="section-number">2.7.2. </span>2. Ataki na bazy danych i luki w zabezpieczeniach</a></li>
-      <li>Next: <a href="rozdzial_4.html" title="next chapter"><span class="section-number">2.7.4. </span>4. Kryptografia w bazach danych</a></li>
+  <li><a href="../index.html">Badania literaturowe</a><ul>
+  <li><a href="index.html">Bezpieczeństwo Baz Danych</a><ul>
+      <li>Previous: <a href="rozdzial_2.html" title="previous chapter">2. Ataki na bazy danych i luki w zabezpieczeniach</a></li>
+      <li>Next: <a href="rozdzial_4.html" title="next chapter">4. Kryptografia w bazach danych</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
