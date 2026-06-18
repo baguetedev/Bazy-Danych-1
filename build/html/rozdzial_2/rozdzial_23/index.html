@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Kontrola i konserwacja &#8212; Sprawozdanie-z-laboratoriów  documentation</title>
+    <title>2.3. Kontrola i konserwacja &#8212; Sprawozdanie-z-laboratoriów  documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d1102ebc" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
@@ -13,8 +13,8 @@
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Monitorowanie i diagnostyka" href="../rozdzial_24/index.html" />
-    <link rel="prev" title="Konfiguracja bazy danych PostgreSQL" href="../rozdzial_22/index.html" />
+    <link rel="next" title="2.4. Monitorowanie i diagnostyka" href="../rozdzial_24/index.html" />
+    <link rel="prev" title="2.2. Konfiguracja bazy danych PostgreSQL" href="../rozdzial_22/index.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -33,7 +33,7 @@
           <div class="body" role="main">
             
   <section id="kontrola-i-konserwacja">
-<h1>Kontrola i konserwacja<a class="headerlink" href="#kontrola-i-konserwacja" title="Link to this heading">¶</a></h1>
+<h1><span class="section-number">2.3. </span>Kontrola i konserwacja<a class="headerlink" href="#kontrola-i-konserwacja" title="Link to this heading">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Autorzy<span class="colon">:</span></dt>
 <dd class="field-odd"><ol class="arabic simple">
@@ -43,7 +43,7 @@
 </dd>
 </dl>
 <section id="wprowadzenie-i-planowanie-konserwacji">
-<h2>Wprowadzenie i planowanie konserwacji<a class="headerlink" href="#wprowadzenie-i-planowanie-konserwacji" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">2.3.1. </span>Wprowadzenie i planowanie konserwacji<a class="headerlink" href="#wprowadzenie-i-planowanie-konserwacji" title="Link to this heading">¶</a></h2>
 <p>Współczesne systemy relacyjnych baz danych to wysoce skomplikowane środowiska, które wymagają ciągłego i proaktywnego nadzoru. Aby zagwarantować wysoką dostępność i niezawodność, niezbędne jest rygorystyczne planowanie procesów konserwacyjnych, które opiera się na odpowiedzi na trzy kluczowe pytania:</p>
 <ul class="simple">
 <li><p><strong>Kiedy?</strong> Operacje inwazyjne (np. pełna przebudowa tabel i indeksów) powinny być planowane w tzw. oknach serwisowych, czyli w godzinach najniższego obciążenia systemu (zwykle w nocy lub w weekendy). Lżejsze prace konserwacyjne mogą odbywać się w tle.</p></li>
@@ -52,7 +52,7 @@
 </ul>
 </section>
 <section id="zarzadzanie-stanem-serwera-i-sesjami">
-<h2>Zarządzanie stanem serwera i sesjami<a class="headerlink" href="#zarzadzanie-stanem-serwera-i-sesjami" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">2.3.2. </span>Zarządzanie stanem serwera i sesjami<a class="headerlink" href="#zarzadzanie-stanem-serwera-i-sesjami" title="Link to this heading">¶</a></h2>
 <p>Podstawą kontroli nad środowiskiem bazodanowym jest zarządzanie cyklem życia samej usługi. Uruchamianie, zatrzymywanie i restartowanie serwera bazy danych realizuje się najczęściej za pośrednictwem menedżera usług systemu operacyjnego (np. polecenia <cite>systemctl start/stop/restart postgresql</cite>) lub za pomocą dedykowanego narzędzia wiersza poleceń <cite>pg_ctl</cite>.</p>
 <p>Podczas wdrażania krytycznych aktualizacji lub w sytuacjach awaryjnych, konieczne jest sprawne zarządzanie ruchem użytkowników:</p>
 <ul class="simple">
@@ -70,7 +70,7 @@
 </div>
 </section>
 <section id="proces-vacuum">
-<h2>Proces Vacuum<a class="headerlink" href="#proces-vacuum" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">2.3.3. </span>Proces Vacuum<a class="headerlink" href="#proces-vacuum" title="Link to this heading">¶</a></h2>
 <p>Architektura PostgreSQL opiera się na mechanizmie MVCC (Multi-Version Concurrency Control). Oznacza to, że instrukcje aktualizacji (UPDATE) i usuwania (DELETE) nie niszczą fizycznie starych danych, lecz tworzą tzw. “martwe krotki” (dead tuples). Do zarządzania nimi służy proces czyszczenia:</p>
 <ul class="simple">
 <li><p><strong>VACUUM:</strong> Standardowa operacja zwalniająca miejsce po martwych wierszach, czyniąca je dostępnymi dla nowych danych. Nie zmniejsza ona fizycznego rozmiaru pliku na dysku i nie blokuje możliwości jednoczesnego odczytu i zapisu tabeli.</p></li>
@@ -79,7 +79,7 @@
 </ul>
 </section>
 <section id="zarzadzanie-transakcjami-i-schematy-schema">
-<h2>Zarządzanie transakcjami i schematy (SCHEMA)<a class="headerlink" href="#zarzadzanie-transakcjami-i-schematy-schema" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">2.3.4. </span>Zarządzanie transakcjami i schematy (SCHEMA)<a class="headerlink" href="#zarzadzanie-transakcjami-i-schematy-schema" title="Link to this heading">¶</a></h2>
 <p>Kolejnym aspektem administracji jest dbanie o logiczną strukturę bazy oraz spójność operacji.</p>
 <p><strong>SCHEMA (Schematy)</strong> to wirtualne przestrzenie nazw (przypominające katalogi w systemie operacyjnym), służące do logicznego grupowania tabel, widoków i funkcji. Ich główne zastosowania to:
 * Izolacja danych różnych mikrousług lub aplikacji wewnątrz jednej wspólnej bazy danych.
@@ -95,12 +95,12 @@
 </div>
 </section>
 <section id="zarzadzanie-indeksami">
-<h2>Zarządzanie indeksami<a class="headerlink" href="#zarzadzanie-indeksami" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">2.3.5. </span>Zarządzanie indeksami<a class="headerlink" href="#zarzadzanie-indeksami" title="Link to this heading">¶</a></h2>
 <p>Indeksy są fundamentalne dla wydajnego wyszukiwania danych, jednak ich utrzymanie kosztuje — spowalniają one modyfikacje danych (DML) i konsumują miejsce na dysku.</p>
 <p>Prawidłowe zarządzanie indeksami polega na stałym monitorowaniu ich wykorzystania. Należy identyfikować i usuwać indeksy, które nie są wykorzystywane przez planistę zapytań (tzw. unused indexes). Dodatkowo, podobnie jak tabele, indeksy ulegają fragmentacji. Z tego powodu administrator powinien regularnie planować operację <strong>REINDEX</strong>, która od nowa buduje strukturę drzewa indeksu, przywracając mu optymalny rozmiar i maksymalną wydajność. W systemach o wysokiej dostępności stosuje się przebudowę w trybie <cite>CONCURRENTLY</cite>, która nie przerywa pracy aplikacji.</p>
 </section>
 <section id="podsumowanie">
-<h2>Podsumowanie<a class="headerlink" href="#podsumowanie" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">2.3.6. </span>Podsumowanie<a class="headerlink" href="#podsumowanie" title="Link to this heading">¶</a></h2>
 <p>Prawidłowa kontrola i konserwacja środowiska bazodanowego to wielowymiarowy proces, wymagający głębokiego zrozumienia zarówno architektury logicznej, jak i fizycznej serwera.</p>
 <p>Stabilność i wydajność systemu zależy w równej mierze od prawidłowego zarządzania stanem usługi i połączeniami, dogłębnego planowania okien serwisowych, jak i proaktywnego zarządzania mechanizmem Vacuum i transakcjami. Wykorzystanie schematów do strukturyzacji danych oraz regularne dbanie o kondycję indeksów pozwala na zbudowanie środowiska, które będzie skalowalne, przewidywalne i odporne na awarie w trudnych, produkcyjnych warunkach.</p>
 <dl class="field-list simple">
@@ -131,21 +131,32 @@
 
 
 <h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">spis treści:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_1/index.html">Wstęp oraz linki</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Badania literaturowe</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_3/index.html">Rozdział 3: Projektowanie Bazy Danych: System Zarządzania Biblioteką</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_4/index.html">Rozdział 4: Implementacja fizyczna i zasilanie bazy danych</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_5/index.html">Rozdział 5: Komunikacja i operacje na danych</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_1/index.html">1. Wstęp oraz linki</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">2. Badania literaturowe</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../rozdzial_21/index.html">2.1. Sprzęt dla bazy danych</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rozdzial_22/index.html">2.2. Konfiguracja bazy danych PostgreSQL</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.3. Kontrola i konserwacja</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rozdzial_24/index.html">2.4. Monitorowanie i diagnostyka</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rozdzial_25/index.html">2.5. Wydajność, skalowanie i replikacja danych</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rozdzial_26/index.html">2.6. Partycjonowanie danych</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rozdzial_27/index.html">2.7. Bezpieczeństwo Baz Danych</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rozdzial_28/index.html">2.8. Kopie zapasowe i odzyskiwanie danych</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_3/index.html">3. Rozdział 3: Projektowanie Bazy Danych: System Zarządzania Biblioteką</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_4/index.html">4. Rozdział 4: Implementacja fizyczna i zasilanie bazy danych</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_5/index.html">5. Rozdział 5: Komunikacja i operacje na danych</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="../index.html">Badania literaturowe</a><ul>
-      <li>Previous: <a href="../rozdzial_22/index.html" title="previous chapter">Konfiguracja bazy danych PostgreSQL</a></li>
-      <li>Next: <a href="../rozdzial_24/index.html" title="next chapter">Monitorowanie i diagnostyka</a></li>
+  <li><a href="../index.html"><span class="section-number">2. </span>Badania literaturowe</a><ul>
+      <li>Previous: <a href="../rozdzial_22/index.html" title="previous chapter"><span class="section-number">2.2. </span>Konfiguracja bazy danych PostgreSQL</a></li>
+      <li>Next: <a href="../rozdzial_24/index.html" title="next chapter"><span class="section-number">2.4. </span>Monitorowanie i diagnostyka</a></li>
   </ul></li>
   </ul></li>
 </ul>
