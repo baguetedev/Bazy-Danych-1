@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.3.1)  27 JUN 2026 15:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.3.1)  27 JUN 2026 15:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1047,32 +1047,8 @@ Chapter 5.
 [41
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 3233--3239
-[]\T1/qtm/m/n/10.95 SE-LECT ID_Czytelnika, Imie, Nazwisko FROM Czytel-nicy EX-C
-EPT SE-LECT
- []
-
-
 
 [42]
-Underfull \hbox (badness 6808) in paragraph at lines 3412--3420
-\T1/qtm/m/n/10.95 czenia w JOIN Czytel-nicy c ON w.ID_Czytelnika = c.ID_Czyteln
-ika JOIN Ksi-azki
- []
-
-
-Underfull \hbox (badness 5475) in paragraph at lines 3498--3500
-\T1/qtm/m/n/10.95 (SE-LECT Ty-tul FROM Ksi-azki WHERE ID_Autora = a.ID_Autora O
-R-DER BY
- []
-
-
-Underfull \hbox (badness 5681) in paragraph at lines 3541--3544
-\T1/qtm/m/n/10.95 SE-LECT COUNT(ID_Wypozyczenia) as suma FROM Wypozy-czenia GRO
-UP BY
- []
-
-
 
 [43]
 
@@ -1092,7 +1068,7 @@ Here is how much of TeX's memory you used:
  43457 multiletter control sequences out of 15000+600000
  628017 words of font info for 105 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
- 72i,12n,82p,1216b,715s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,12n,82p,1216b,777s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/fontawesome5/FontAwesome5Fr
 ee-Solid.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
 6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><
@@ -1103,7 +1079,7 @@ fonts/type1/public/tex-gyre/qtmri.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/txfonts/t1xbtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/t
 xfonts/t1xtt.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/t1xt
 t.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/tcxtt.pfb>
-Output written on sprawozdanie-z-laboratoriow.pdf (48 pages, 2599951 bytes).
+Output written on sprawozdanie-z-laboratoriow.pdf (48 pages, 2601241 bytes).
 PDF statistics:
  1196 PDF objects out of 1200 (max. 8388607)
  1105 compressed objects within 12 object streams
