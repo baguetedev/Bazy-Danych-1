@@ -4,7 +4,6 @@ Wstęp oraz linki
 
 :Autorzy:
     1. Paweł Łoćwin
-    2. Paweł Łosowski
 
 Wstęp do sprawozdania
 =====================
