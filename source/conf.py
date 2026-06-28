@@ -55,8 +55,8 @@ latex_documents = [
         'index', 
         'sprawozdanie-z-laboratoriow.tex', 
         'Sprawozdanie z Laboratorium: Bazy Danych',
-        'Paweł Łoćwin, Paweł Łosowski',  # Combined authors into one string
-        'manual'                         # This is now correctly the documentclass
+        'Paweł Łoćwin', 
+        'manual'                      
     ),
 ]
 
