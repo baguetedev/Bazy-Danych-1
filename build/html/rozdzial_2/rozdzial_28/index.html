@@ -13,8 +13,8 @@
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="3. Rozdział 3: Projektowanie Bazy Danych: System Zarządzania Biblioteką" href="../../rozdzial_3/index.html" />
-    <link rel="prev" title="2.7.6. 6. Bezpieczeństwo kopii zapasowych i Disaster Recovery" href="../rozdzial_27/rozdzial_6.html" />
+    <link rel="next" title="3. Projektowanie Bazy Danych: System Zarządzania Biblioteką" href="../../rozdzial_3/index.html" />
+    <link rel="prev" title="2.7.6. Bezpieczeństwo kopii zapasowych i Disaster Recovery" href="../rozdzial_27/rozdzial_6.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -34,7 +34,11 @@
             
   <section id="kopie-zapasowe-i-odzyskiwanie-danych">
 <h1><span class="section-number">2.8. </span>Kopie zapasowe i odzyskiwanie danych<a class="headerlink" href="#kopie-zapasowe-i-odzyskiwanie-danych" title="Link to this heading">¶</a></h1>
-<p><strong>Autorzy:</strong> Norbert Antonovitch, Michał Bednarczyk, Jan Balazs de Borbatviz</p>
+<dl class="field-list simple">
+<dt class="field-odd">Autorzy<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Norbert Antonovitch, Michał Bednarczyk, Jan Balazs de Borbatviz</p>
+</dd>
+</dl>
 <section id="wstep">
 <h2><span class="section-number">2.8.1. </span>Wstęp<a class="headerlink" href="#wstep" title="Link to this heading">¶</a></h2>
 <p>Kopie zapasowe w PostgreSQL można podzielić na dwa główne nurty: kopie logiczne wykonywane narzędziami <code class="docutils literal notranslate"><span class="pre">pg_dump</span></code> i <code class="docutils literal notranslate"><span class="pre">pg_dumpall</span></code>  oraz kopie fizyczne całego klastra wykonywane m.in. przez <code class="docutils literal notranslate"><span class="pre">pg_basebackup</span></code> wraz z archiwizacją WAL dla odzyskiwania punktowego PITR (Point-in-Time Recovery). Kopie logiczne są wygodne do odtwarzania pojedynczych obiektów i pojedynczych baz, natomiast kopie fizyczne są podstawą pełnego odtworzenia instancji, tablespaces i odzyskiwania po awariach.</p>
@@ -147,9 +151,9 @@ find<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$KATA
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../rozdzial_1/index.html">1. Wstęp oraz linki</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">2. Badania literaturowe</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_3/index.html">3. Rozdział 3: Projektowanie Bazy Danych: System Zarządzania Biblioteką</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_4/index.html">4. Rozdział 4: Implementacja fizyczna i zasilanie bazy danych</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_5/index.html">5. Rozdział 5: Komunikacja i operacje na danych</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_3/index.html">3. Projektowanie Bazy Danych: System Zarządzania Biblioteką</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_4/index.html">4. Implementacja fizyczna i zasilanie bazy danych</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rozdzial_5/index.html">5. Komunikacja i operacje na danych</a></li>
 </ul>
 
 <div class="relations">
@@ -157,8 +161,8 @@ find<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$KATA
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html"><span class="section-number">2. </span>Badania literaturowe</a><ul>
-      <li>Previous: <a href="../rozdzial_27/rozdzial_6.html" title="previous chapter"><span class="section-number">2.7.6. </span>6. Bezpieczeństwo kopii zapasowych i Disaster Recovery</a></li>
-      <li>Next: <a href="../../rozdzial_3/index.html" title="next chapter"><span class="section-number">3. </span>Rozdział 3: Projektowanie Bazy Danych: System Zarządzania Biblioteką</a></li>
+      <li>Previous: <a href="../rozdzial_27/rozdzial_6.html" title="previous chapter"><span class="section-number">2.7.6. </span>Bezpieczeństwo kopii zapasowych i Disaster Recovery</a></li>
+      <li>Next: <a href="../../rozdzial_3/index.html" title="next chapter"><span class="section-number">3. </span>Projektowanie Bazy Danych: System Zarządzania Biblioteką</a></li>
   </ul></li>
   </ul></li>
 </ul>

@@ -1,4 +1,4 @@
-PWD /home/student15/gitstuiff/Bazy-Danych-1/build/latex
+PWD /home/pawel_a/Bazy-Danych-1/build/latex
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
@@ -78,8 +78,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx
 INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx
 INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx
-INPUT /usr/share/texlive/texmf-dist/tex/latex/fontawesome5/fontawesome5.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/fontawesome5/fontawesome5.sty
 INPUT ./sphinxoptionshyperref.sty
 INPUT sphinxoptionshyperref.sty
 INPUT ./sphinxoptionsgeometry.sty
@@ -256,17 +254,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-INPUT /usr/share/texlive/texmf-dist/tex/latex/fontawesome5/fontawesome5.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/fontawesome5/fontawesome5-generic-helper.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/fontawesome5/fontawesome5-generic-helper.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/fontawesome5/fontawesome5-mapping.def
-INPUT /usr/share/texlive/texmf-dist/tex/latex/fontawesome5/fontawesome5-mapping.def
 INPUT ./sprawozdanie-z-laboratoriow.out
 INPUT ./sprawozdanie-z-laboratoriow.out
 INPUT sprawozdanie-z-laboratoriow.out
@@ -366,11 +353,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/ts1txtt.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/ts1txtt.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/txfonts/ts1txtt.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/txfonts/tcxtt.tfm
-INPUT /usr/share/texlive/texmf-dist/tex/latex/fontawesome5/ufontawesomefree1.fd
-INPUT /usr/share/texlive/texmf-dist/tex/latex/fontawesome5/ufontawesomefree1.fd
-INPUT /usr/share/texlive/texmf-dist/tex/latex/fontawesome5/ufontawesomefree1.fd
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/fontawesome5/fa5free1solid.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free1.enc
 INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ec-qtmr.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm
@@ -420,7 +402,6 @@ INPUT /usr/share/texmf/fonts/tfm/public/tex-gyre/ts1-qtmb.tfm
 INPUT sprawozdanie-z-laboratoriow.aux
 INPUT ./sprawozdanie-z-laboratoriow.out
 INPUT ./sprawozdanie-z-laboratoriow.out
-INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/fontawesome5/FontAwesome5Free-Solid.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb
 INPUT /usr/share/texmf/fonts/type1/public/tex-gyre/qhvb.pfb
