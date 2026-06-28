@@ -80,7 +80,7 @@
 
 
 \title{Sprawozdanie z Laboratorium: Bazy Danych}
-\date{Jun 27, 2026}
+\date{Jun 28, 2026}
 \release{}
 \author{Paweł Łoćwin, Paweł Łosowski}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -111,10 +111,6 @@
 \item {} 
 \sphinxAtStartPar
 Paweł Łoćwin
-
-\item {} 
-\sphinxAtStartPar
-Paweł Łosowski
 
 \end{enumerate}
 
@@ -1475,15 +1471,18 @@ Współczesne systemy relacyjnych baz danych to wysoce skomplikowane środowiska
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstylestrong{Jak?} Konserwacja powinna być maksymalnie zautomatyzowana (np. z wykorzystaniem systemowego demona CRON lub rozszerzenia \sphinxtitleref{pg\_cron}). Ręczne interwencje administratora powinny być zarezerwowane wyłącznie dla sytuacji awaryjnych i niestandardowych problemów wydajnościowych.
+\sphinxstylestrong{Jak?} Konserwacja powinna być maksymalnie zautomatyzowana (np. z wykorzystaniem systemowego demona CRON lub rozszerzenia \sphinxcode{\sphinxupquote{pg\_cron}} w PostgreSQL). Ręczne interwencje administratora powinny być zarezerwowane wyłącznie dla sytuacji awaryjnych.
 
 \end{itemize}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{Uwaga dla środowisk SQLite:} W przeciwieństwie do potężnego PostgreSQL, SQLite jako baza plikowa i wbudowana (embedded) nie posiada demonów działających w tle, więc pojęcie “planowania konserwacji” sprowadza się najczęściej do ręcznego wywoływania skryptów optymalizujących (np. z poziomu aplikacji klienckiej) w momentach, gdy plik bazy nie jest zablokowany.
 
 
 \subsection{Zarządzanie stanem serwera i sesjami}
 \label{\detokenize{rozdzial_2/rozdzial_23/index:zarzadzanie-stanem-serwera-i-sesjami}}
 \sphinxAtStartPar
-Podstawą kontroli nad środowiskiem bazodanowym jest zarządzanie cyklem życia samej usługi. Uruchamianie, zatrzymywanie i restartowanie serwera bazy danych realizuje się najczęściej za pośrednictwem menedżera usług systemu operacyjnego (np. polecenia \sphinxtitleref{systemctl start/stop/restart postgresql}) lub za pomocą dedykowanego narzędzia wiersza poleceń \sphinxtitleref{pg\_ctl}.
+Podstawą kontroli nad środowiskiem bazodanowym w architekturze klient\sphinxhyphen{}serwer (takiej jak PostgreSQL) jest zarządzanie cyklem życia samej usługi. Uruchamianie, zatrzymywanie i restartowanie serwera bazy danych realizuje się najczęściej za pośrednictwem menedżera usług systemu operacyjnego (np. polecenia \sphinxcode{\sphinxupquote{systemctl start/stop/restart postgresql}}) lub za pomocą dedykowanego narzędzia wiersza poleceń \sphinxcode{\sphinxupquote{pg\_ctl}}.
 
 \sphinxAtStartPar
 Podczas wdrażania krytycznych aktualizacji lub w sytuacjach awaryjnych, konieczne jest sprawne zarządzanie ruchem użytkowników:
@@ -1499,7 +1498,7 @@ Podczas wdrażania krytycznych aktualizacji lub w sytuacjach awaryjnych, koniecz
 \end{itemize}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Zapobieganie nawiązywaniu nowych połączeń do bazy danych}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Zapobieganie nawiązywaniu nowych połączeń do bazy danych (PostgreSQL)}
 \PYG{k}{ALTER}\PYG{+w}{ }\PYG{k}{DATABASE}\PYG{+w}{ }\PYG{n}{biblioteka\PYGZus{}db}\PYG{+w}{ }\PYG{n}{ALLOW\PYGZus{}CONNECTIONS}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{false}\PYG{p}{;}
 
 \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Siłowe rozłączenie wszystkich aktywnych użytkowników (poza aktualną sesją)}
@@ -1507,6 +1506,9 @@ Podczas wdrażania krytycznych aktualizacji lub w sytuacjach awaryjnych, koniecz
 \PYG{k}{FROM}\PYG{+w}{ }\PYG{n}{pg\PYGZus{}stat\PYGZus{}activity}
 \PYG{k}{WHERE}\PYG{+w}{ }\PYG{n}{datname}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}biblioteka\PYGZus{}db\PYGZsq{}}\PYG{+w}{ }\PYG{k}{AND}\PYG{+w}{ }\PYG{n}{pid}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{pg\PYGZus{}backend\PYGZus{}pid}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
 \end{sphinxVerbatim}
+
+\sphinxAtStartPar
+\sphinxstyleemphasis{Uwaga dla środowisk SQLite:} Ponieważ SQLite nie posiada procesu serwera zarządzającego użytkownikami sieciowymi, nie ma tu koncepcji “zabijania sesji” czy blokowania nowych połączeń sieciowych. Dostęp jest kontrolowany wyłącznie na poziomie blokad plików systemu operacyjnego (file locks).
 
 
 \subsection{Proces Vacuum}
@@ -1528,6 +1530,9 @@ Architektura PostgreSQL opiera się na mechanizmie MVCC (Multi\sphinxhyphen{}Ver
 
 \end{itemize}
 
+\sphinxAtStartPar
+\sphinxstyleemphasis{Uwaga dla środowisk SQLite:} SQLite w odpowiedzi na operację DELETE po prostu oznacza miejsce jako “wolne” w pliku. Aby fizycznie skurczyć plik, należy wywołać unikalne polecenie \sphinxcode{\sphinxupquote{VACUUM}} (odpowiednik \sphinxcode{\sphinxupquote{VACUUM FULL}} z PostgreSQL). Możliwe jest również włączenie trybu \sphinxcode{\sphinxupquote{PRAGMA auto\_vacuum = FULL}}, jednak ze względów wydajnościowych narzuca on znaczny koszt przy każdej modyfikacji.
+
 
 \subsection{Zarządzanie transakcjami i schematy (SCHEMA)}
 \label{\detokenize{rozdzial_2/rozdzial_23/index:zarzadzanie-transakcjami-i-schematy-schema}}
@@ -1535,13 +1540,24 @@ Architektura PostgreSQL opiera się na mechanizmie MVCC (Multi\sphinxhyphen{}Ver
 Kolejnym aspektem administracji jest dbanie o logiczną strukturę bazy oraz spójność operacji.
 
 \sphinxAtStartPar
-\sphinxstylestrong{SCHEMA (Schematy)} to wirtualne przestrzenie nazw (przypominające katalogi w systemie operacyjnym), służące do logicznego grupowania tabel, widoków i funkcji. Ich główne zastosowania to:
-* Izolacja danych różnych mikrousług lub aplikacji wewnątrz jednej wspólnej bazy danych.
-* Implementacja architektury wielodostępowej (multi\sphinxhyphen{}tenant), gdzie każdy klient aplikacji obsługiwany jest w dedykowanym, oddzielnym schemacie.
-* Ułatwione i zbiorcze zarządzanie uprawnieniami dostępu.
+\sphinxstylestrong{SCHEMA (Schematy)} to wirtualne przestrzenie nazw (przypominające katalogi w systemie operacyjnym), służące do logicznego grupowania tabel, widoków i funkcji. Warto nadmienić, że mechanizm logicznych schematów znany z PostgreSQL nie występuje natywnie w SQLite (istnieje tam komenda ATTACH do dołączania innych plików baz danych jako schematów, ale działa to na innej zasadzie). Główne zastosowania schematów w PostgreSQL to:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Izolacja danych różnych mikrousług lub aplikacji wewnątrz jednej wspólnej bazy danych.
+
+\item {} 
+\sphinxAtStartPar
+Implementacja architektury wielodostępowej (multi\sphinxhyphen{}tenant), gdzie każdy klient aplikacji obsługiwany jest w dedykowanym, oddzielnym schemacie.
+
+\item {} 
+\sphinxAtStartPar
+Ułatwione i zbiorcze zarządzanie uprawnieniami dostępu.
+
+\end{itemize}
 
 \sphinxAtStartPar
-\sphinxstylestrong{Zarządzanie transakcjami} to proces kontrolowania instrukcji (BEGIN, COMMIT, ROLLBACK) w taki sposób, aby zachować zgodność z regułami ACID. Administrator musi zwracać szczególną uwagę na zapobieganie tzw. długim transakcjom (long\sphinxhyphen{}running transactions). Otwarta i porzucona transakcja powstrzymuje proces Vacuum przed usuwaniem martwych krotek, co prowadzi do drastycznego spadku wydajności całej bazy.
+\sphinxstylestrong{Zarządzanie transakcjami} to proces kontrolowania instrukcji (BEGIN, COMMIT, ROLLBACK) w taki sposób, aby zachować zgodność z regułami ACID. Administrator musi zwracać szczególną uwagę na zapobieganie tzw. długim transakcjom (long\sphinxhyphen{}running transactions). Otwarta i porzucona transakcja powstrzymuje proces Vacuum przed usuwaniem martwych krotek, co prowadzi do drastycznego spadku wydajności całej bazy (dotyczy to tak samo PostgreSQL, jak i SQLite, gdzie długa transakcja zapisu blokuje cały plik bazy).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZhy{}\PYGZhy{} Przykład logiki transakcyjnej z wykorzystaniem konkretnego schematu}
@@ -1558,30 +1574,16 @@ Kolejnym aspektem administracji jest dbanie o logiczną strukturę bazy oraz sp�
 Indeksy są fundamentalne dla wydajnego wyszukiwania danych, jednak ich utrzymanie kosztuje — spowalniają one modyfikacje danych (DML) i konsumują miejsce na dysku.
 
 \sphinxAtStartPar
-Prawidłowe zarządzanie indeksami polega na stałym monitorowaniu ich wykorzystania. Należy identyfikować i usuwać indeksy, które nie są wykorzystywane przez planistę zapytań (tzw. unused indexes). Dodatkowo, podobnie jak tabele, indeksy ulegają fragmentacji. Z tego powodu administrator powinien regularnie planować operację \sphinxstylestrong{REINDEX}, która od nowa buduje strukturę drzewa indeksu, przywracając mu optymalny rozmiar i maksymalną wydajność. W systemach o wysokiej dostępności stosuje się przebudowę w trybie \sphinxtitleref{CONCURRENTLY}, która nie przerywa pracy aplikacji.
+Prawidłowe zarządzanie indeksami polega na stałym monitorowaniu ich wykorzystania. Należy identyfikować i usuwać indeksy, które nie są wykorzystywane przez planistę zapytań (tzw. unused indexes). Dodatkowo, podobnie jak tabele, indeksy ulegają fragmentacji. Z tego powodu administrator powinien regularnie planować operację \sphinxstylestrong{REINDEX}, która od nowa buduje strukturę drzewa indeksu, przywracając mu optymalny rozmiar i maksymalną wydajność. W systemach PostgreSQL o wysokiej dostępności stosuje się przebudowę w trybie \sphinxcode{\sphinxupquote{CONCURRENTLY}}, która nie przerywa pracy aplikacji (SQLite posiada jedynie standardowe polecenie REINDEX, blokujące tabele).
 
 
 \subsection{Podsumowanie}
 \label{\detokenize{rozdzial_2/rozdzial_23/index:podsumowanie}}
 \sphinxAtStartPar
-Prawidłowa kontrola i konserwacja środowiska bazodanowego to wielowymiarowy proces, wymagający głębokiego zrozumienia zarówno architektury logicznej, jak i fizycznej serwera.
+Prawidłowa kontrola i konserwacja środowiska bazodanowego to wielowymiarowy proces, wymagający głębokiego zrozumienia zarówno architektury logicznej, jak i fizycznej silnika.
 
 \sphinxAtStartPar
-Stabilność i wydajność systemu zależy w równej mierze od prawidłowego zarządzania stanem usługi i połączeniami, dogłębnego planowania okien serwisowych, jak i proaktywnego zarządzania mechanizmem Vacuum i transakcjami. Wykorzystanie schematów do strukturyzacji danych oraz regularne dbanie o kondycję indeksów pozwala na zbudowanie środowiska, które będzie skalowalne, przewidywalne i odporne na awarie w trudnych, produkcyjnych warunkach.
-\begin{quote}\begin{description}
-\sphinxlineitem{Autorzy}\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} 
-\sphinxAtStartPar
-Paweł Łoćwin
-
-\item {} 
-\sphinxAtStartPar
-Paweł Łosowski
-
-\end{enumerate}
-
-\end{description}\end{quote}
+Stabilność i wydajność dużych systemów relacyjnych (PostgreSQL) zależy w równej mierze od prawidłowego zarządzania stanem usługi i połączeniami sieciowymi, dogłębnego planowania okien serwisowych, jak i proaktywnego zarządzania mechanizmem AutoVacuum. Z kolei w środowiskach wbudowanych (SQLite) ciężar ten przenosi się na precyzyjne zarządzanie blokadami plików operacyjnych oraz manualną defragmentację przestrzeni. Niezależnie od wybranego silnika, regularne dbanie o kondycję indeksów i izolacja transakcyjna pozwalają na zbudowanie stabilnego systemu odpornego na obciążenia w trudnych, produkcyjnych warunkach.
 
 \sphinxstepscope
 
@@ -1873,9 +1875,47 @@ fio\PYG{+w}{ }\PYGZhy{}\PYGZhy{}name\PYG{o}{=}test\PYGZus{}bazy\PYG{+w}{ }\PYGZh
 
 \sphinxstepscope
 
+\sphinxAtStartPar
+/Author: {[}Michał Bystrzak{]} /
 
-\section{Partycjonowanie danych}
+
+\section{2.6. Partycjonowanie danych}
 \label{\detokenize{rozdzial_2/rozdzial_26/index:partycjonowanie-danych}}\label{\detokenize{rozdzial_2/rozdzial_26/index::doc}}
+
+\subsection{Wprowadzenie}
+\label{\detokenize{rozdzial_2/rozdzial_26/index:wprowadzenie}}
+\sphinxAtStartPar
+Partycjonowanie to technika optymalizacji baz danych, polegająca na logicznym podziale jednej, ogromnej tabeli na mniejsze, fizyczne fragmenty nazywane partycjami. Z perspektywy aplikacji docelowej i użytkownika tabela wciąż zachowuje się jak spójna całość. Głównym celem tego zabiegu jest przyspieszenie zapytań (baza przeszukuje tylko konkretny fragment, a nie całość) oraz ułatwienie usuwania starych danych (zamiast powolnej operacji \sphinxcode{\sphinxupquote{DELETE}}, po prostu odpinasz i usuwasz całą partycję).
+
+
+\subsection{Partycjonowanie w PostgreSQL}
+\label{\detokenize{rozdzial_2/rozdzial_26/index:partycjonowanie-w-postgresql}}
+\sphinxAtStartPar
+PostgreSQL obsługuje natywne partycjonowanie deklaratywne. Oznacza to, że silnik sam zarządza przydziałem rekordów do odpowiednich partycji na podstawie ustalonych z góry reguł. Trzy główne metody to:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Zakresowe (RANGE):} Dzielenie danych np. po dacie (zlecenia z 2025 roku trafiają do jednej partycji, a z 2026 do drugiej).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Listowe (LIST):} Dzielenie po konkretnych wartościach (np. zlecenia o statusie “Zakończone” idą do jednej partycji, a “W trakcie” do innej).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Haszujące (HASH):} Matematyczne rozdzielenie danych na podstawie funkcji skrótu, by równomiernie obciążyć dyski serwera.
+
+\end{itemize}
+
+
+\subsection{Partycjonowanie w SQLite}
+\label{\detokenize{rozdzial_2/rozdzial_26/index:partycjonowanie-w-sqlite}}
+\sphinxAtStartPar
+W przeciwieństwie do PostgreSQL, lekki silnik SQLite \sphinxstylestrong{nie posiada} wbudowanego, natywnego mechanizmu partycjonowania. Wynika to z faktu, że jest to prosta baza plikowa.
+
+\sphinxAtStartPar
+Aby uzyskać efekt partycjonowania w SQLite, programista musi to zrobić ręcznie. Należy stworzyć kilka osobnych tabel fizycznych (np. \sphinxcode{\sphinxupquote{zlecenia\_2025}}, \sphinxcode{\sphinxupquote{zlecenia\_2026}}), a następnie połączyć je wspólnym widokiem (\sphinxcode{\sphinxupquote{VIEW}}). Dodatkowo trzeba napisać specjalne wyzwalacze (\sphinxcode{\sphinxupquote{TRIGGERS INSTEAD OF}}), które będą przechwytywać dane wstawiane do widoku i automatycznie kierować je do odpowiedniej pod\sphinxhyphen{}tabeli.
+
 \sphinxstepscope
 
 
